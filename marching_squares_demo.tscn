@@ -1,30 +1,38 @@
 [gd_scene format=3 uid="uid://ue3tjyl6tm5h"]
 
 [ext_resource type="Script" uid="uid://0a757mly6syc" path="res://moving_camera.gd" id="1_5jqoh"]
+[ext_resource type="Texture2D" uid="uid://ch3o78ynvxeup" path="res://Player.png" id="2_ej658"]
 [ext_resource type="Script" uid="uid://bot13g1dghusg" path="res://terrain.gd" id="2_qsb6n"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qsb6n"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qsb6n"]
 frequency = 0.002
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qsb6n"]
+radius = 16.0
+
 [node name="MarchingSquaresDemo" type="Node2D" unique_id=1486930145]
+
+[node name="Terrain" type="Node2D" parent="." unique_id=1912078364]
+scale = Vector2(1024, 1024)
+script = ExtResource("2_qsb6n")
+size = 4
+detail = 64
+noise = SubResource("FastNoiseLite_qsb6n")
+iso = -0.35
 
 [node name="MovingCamera" type="Node2D" parent="." unique_id=1660056248]
 script = ExtResource("1_5jqoh")
 speed = 256
 
 [node name="RigidBody2D" type="RigidBody2D" parent="MovingCamera" unique_id=67412913]
-gravity_scale = 0.0
+position = Vector2(0, -16)
+gravity_scale = 8.0
 
 [node name="Camera2D" type="Camera2D" parent="MovingCamera/RigidBody2D" unique_id=77251212]
+zoom = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovingCamera/RigidBody2D" unique_id=1008471303]
 shape = SubResource("CircleShape2D_qsb6n")
 
-[node name="Terrain" type="Node2D" parent="." unique_id=1912078364]
-scale = Vector2(4096, 4096)
-script = ExtResource("2_qsb6n")
-detail = 128
-noise = SubResource("FastNoiseLite_qsb6n")
-iso = -0.35
+[node name="Sprite2D" type="Sprite2D" parent="MovingCamera/RigidBody2D" unique_id=1073481637]
+texture = ExtResource("2_ej658")

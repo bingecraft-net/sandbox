@@ -11,6 +11,8 @@ func _ready() -> void:
 	st.set_color(Color.SADDLE_BROWN)
 	st.set_uv(Vector2(0, 0))
 	
+	var colliders = StaticBody2D.new()
+	
 	for index in range(detail * detail):
 		var x = index % detail
 		@warning_ignore("integer_division")
@@ -36,14 +38,27 @@ func _ready() -> void:
 		value = noise.get_noise_2d(point.x, point.y)
 		if value >= iso: id += 8
 		
+		var buf = []
+		
 		for vertex in lookup_geometry[id]:
 			vertex = vertex + Vector2(x, y)
 			vertex = vertex / detail
 			st.add_vertex(Vector3(vertex.x, vertex.y, 0))
+			
+			buf.append(vertex)
+			if len(buf) == 3:
+				var collider = CollisionShape2D.new()
+				collider.shape = ConvexPolygonShape2D.new()
+				collider.shape.points = buf
+				colliders.add_child(collider)
+				buf.clear()
+
 	
 	var mesh = MeshInstance2D.new()
 	mesh.mesh = st.commit()
 	add_child(mesh)
+	
+	add_child(colliders)
 
 var lookup_geometry = {
 	0: [],

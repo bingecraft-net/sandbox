@@ -9,14 +9,9 @@ var resource_chunk: Resource = load("res://terrain_chunk.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	position = Vector2(-size * scale.x / 2, 0)
-
-	for index in range(size * size):
-		var x = index % size
-		@warning_ignore("integer_division")
-		var y = index / size
+	for y in range(size):
 		var chunk: Node2D = resource_chunk.instantiate()
-		chunk.position = Vector2(x, y)
+		chunk.position = Vector2(-chunk.scale.x / 2, y)
 		chunk.detail = detail
 		chunk.noise = noise
 		chunk.iso = iso
