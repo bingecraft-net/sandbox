@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ue3tjyl6tm5h"]
 
-[ext_resource type="Script" uid="uid://0a757mly6syc" path="res://moving_camera.gd" id="1_5jqoh"]
+[ext_resource type="Script" uid="uid://0a757mly6syc" path="res://player.gd" id="1_5jqoh"]
 [ext_resource type="Texture2D" uid="uid://ch3o78ynvxeup" path="res://Player.png" id="2_ej658"]
 [ext_resource type="Script" uid="uid://bot13g1dghusg" path="res://terrain.gd" id="2_qsb6n"]
 
@@ -23,21 +23,21 @@ detail = 64
 noise = SubResource("FastNoiseLite_qsb6n")
 iso = -0.35
 
-[node name="MovingCamera" type="Node2D" parent="." unique_id=1660056248]
+[node name="Player" type="Node2D" parent="." unique_id=1660056248]
 script = ExtResource("1_5jqoh")
 speed = 256
 
-[node name="RigidBody2D" type="RigidBody2D" parent="MovingCamera" unique_id=67412913]
+[node name="RigidBody2D" type="RigidBody2D" parent="Player" unique_id=67412913]
 position = Vector2(0, -16)
 physics_material_override = SubResource("PhysicsMaterial_ej658")
 gravity_scale = 8.0
 lock_rotation = true
 
-[node name="Camera2D" type="Camera2D" parent="MovingCamera/RigidBody2D" unique_id=77251212]
+[node name="Camera2D" type="Camera2D" parent="Player/RigidBody2D" unique_id=77251212]
 zoom = Vector2(2, 2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingCamera/RigidBody2D" unique_id=1008471303]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/RigidBody2D" unique_id=1008471303]
 shape = SubResource("CircleShape2D_qsb6n")
 
-[node name="Sprite2D" type="Sprite2D" parent="MovingCamera/RigidBody2D" unique_id=1073481637]
+[node name="Sprite2D" type="Sprite2D" parent="Player/RigidBody2D" unique_id=1073481637]
 texture = ExtResource("2_ej658")
