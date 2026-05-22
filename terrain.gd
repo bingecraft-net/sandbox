@@ -15,9 +15,15 @@ func _ready() -> void:
 		chunk.detail = detail
 		chunk.noise = noise
 		chunk.iso = iso
+		player_mine_down.connect(chunk._on_player_mine_down)
 		add_child(chunk)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass
+
+signal player_mine_down(player: Node2D)
+
+func _on_player_mine_down(player: Node2D) -> void:
+	player_mine_down.emit(player)

@@ -4,8 +4,52 @@ var detail = 1
 var noise = FastNoiseLite.new()
 var iso = 0
 
+var container: Node2D
+
+var edits = {}
+
+func global_position_to_local_grid(_global_position: Vector2) -> Vector2i:
+	return global_scale_to_local_grid(_global_position - global_position)
+	
+func global_scale_to_local_grid(_global_scale: Vector2) -> Vector2i:
+	var unscale = _global_scale / global_scale
+	var local_grid = unscale * detail
+	return Vector2i(round(local_grid.x), round(local_grid.y))
+	
+func local_grid_to_global_position(local_grid: Vector2i) -> Vector2:
+	return Vector2(local_grid.x, local_grid.y) / detail * global_scale + global_position
+
+func get_value(x: float, y: float) -> float:
+	var local_grid = global_position_to_local_grid(Vector2(x, y))
+	var edit = edits.get(local_grid)
+	if edit: return edit
+	return noise.get_noise_2d(x, y)
+	
+func brush_value(xy: Vector2, diameter: int, value: float):
+	if (xy - global_position - global_scale / 2).length() > global_scale.length() / 2:
+		return 0 
+	var count = 0
+	var brush_top_left = global_position_to_local_grid(xy - Vector2.ONE * diameter / 2)
+	var brush_steps = global_scale_to_local_grid(Vector2.ONE * diameter)
+	for index in range(brush_steps.x * brush_steps.y):
+		var x = index % brush_steps.y
+		var y = index / brush_steps.y
+		var pos = brush_top_left + Vector2i(x, y)
+		if (local_grid_to_global_position(pos) - xy).length() < diameter / 2 and \
+			pos.x >= 0 and pos.x < detail and \
+			pos.y >= 0 and pos.y < detail:
+			edits[pos] = value
+			count += 1
+	return count
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	generate()
+
+func generate() -> void:
+	var last_container = container
+	container = Node2D.new()
+	
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	st.set_color(Color.SADDLE_BROWN)
@@ -23,19 +67,19 @@ func _ready() -> void:
 		var value
 		
 		point = global_position + global_scale * Vector2(x, y) / detail
-		value = noise.get_noise_2d(point.x, point.y)
+		value = get_value(point.x, point.y)
 		if value >= iso: id += 1
 		
 		point = global_position + global_scale * Vector2(x + 1, y) / detail
-		value = noise.get_noise_2d(point.x, point.y)
+		value = get_value(point.x, point.y)
 		if value >= iso: id += 2
 		
 		point = global_position + global_scale * Vector2(x + 1, y + 1) / detail
-		value = noise.get_noise_2d(point.x, point.y)
+		value = get_value(point.x, point.y)
 		if value >= iso: id += 4
 		
 		point = global_position + global_scale * Vector2(x, y + 1) / detail
-		value = noise.get_noise_2d(point.x, point.y)
+		value = get_value(point.x, point.y)
 		if value >= iso: id += 8
 		
 		var buf = []
@@ -56,9 +100,14 @@ func _ready() -> void:
 	
 	var mesh = MeshInstance2D.new()
 	mesh.mesh = st.commit()
-	add_child(mesh)
+	container.add_child(mesh)
 	
-	add_child(colliders)
+	container.add_child(colliders)
+	
+	if last_container:
+		last_container.queue_free()
+	
+	add_child(container)
 
 var lookup_geometry = {
 	0: [],
@@ -188,3 +237,7 @@ var lookup_geometry = {
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	pass
+
+func _on_player_mine_down(player: Node2D) -> void:
+	if brush_value(player.get_node("RigidBody2D").global_position, 64, -0.5) > 0:
+		generate()

@@ -2,6 +2,8 @@ extends Node2D
 
 @export var speed = 1
 
+signal mine_down(player: Node2D)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -23,5 +25,8 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_pressed("ui_down"):
 		linear_velocity += Vector2.DOWN
+	
+	if Input.is_action_just_pressed("ui_down"):
+		mine_down.emit(self)
 	
 	$RigidBody2D.linear_velocity = linear_velocity * speed

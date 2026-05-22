@@ -41,3 +41,5 @@ shape = SubResource("CircleShape2D_qsb6n")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/RigidBody2D" unique_id=1073481637]
 texture = ExtResource("2_ej658")
+
+[connection signal="mine_down" from="Player" to="Terrain" method="_on_player_mine_down"]
