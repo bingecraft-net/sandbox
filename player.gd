@@ -38,4 +38,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
 		mine_down.emit($RigidBody2D.global_position + Vector2.UP * 32, 32, -0.1)
 	
+	if Input.is_action_just_pressed("ui_zoom_in"):
+		$RigidBody2D/Camera2D.zoom = $RigidBody2D/Camera2D.zoom * 2
+	
+	if Input.is_action_just_pressed("ui_zoom_out"):
+		$RigidBody2D/Camera2D.zoom = $RigidBody2D/Camera2D.zoom / 2
+
 	$RigidBody2D.linear_velocity = linear_velocity * speed
