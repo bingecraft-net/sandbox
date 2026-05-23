@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+TARGET=export/$(git rev-parse HEAD)
+rm -r $TARGET
+mkdir -p $TARGET
+/Applications/Godot.app/Contents/MacOS/Godot --export-release Web $TARGET/sandbox.html project.godot
