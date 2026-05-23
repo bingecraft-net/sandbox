@@ -36,8 +36,8 @@ func brush_value(xy: Vector2, diameter: int, value: float):
 		var y = index / brush_steps.y
 		var pos = brush_top_left + Vector2i(x, y)
 		if (local_grid_to_global_position(pos) - xy).length() < diameter / 2 and \
-			pos.x >= 0 and pos.x < detail and \
-			pos.y >= 0 and pos.y < detail:
+			pos.x >= 0 and pos.x <= detail and \
+			pos.y >= 0 and pos.y <= detail:
 			edits[pos] = value
 			count += 1
 	return count
