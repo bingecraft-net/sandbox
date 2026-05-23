@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-signal player_mine_down(player: Node2D)
+signal player_mine_down(pos: Vector2, radius: float, delta: float)
 
-func _on_player_mine_down(player: Node2D) -> void:
-	player_mine_down.emit(player)
+func _on_player_mine_down(pos: Vector2, radius: float, delta: float) -> void:
+	player_mine_down.emit(pos, radius, delta)

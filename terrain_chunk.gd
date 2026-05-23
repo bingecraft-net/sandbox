@@ -22,23 +22,23 @@ func local_grid_to_global_position(local_grid: Vector2i) -> Vector2:
 func get_value(x: float, y: float) -> float:
 	var local_grid = global_position_to_local_grid(Vector2(x, y))
 	var edit = edits.get(local_grid)
-	if edit: return edit
+	if edit: return edit + noise.get_noise_2d(x, y)
 	return noise.get_noise_2d(x, y)
 	
-func brush_value(xy: Vector2, diameter: int, value: float):
+func brush_value(xy: Vector2, radius: int, delta: float):
 	if (xy - global_position - global_scale / 2).length() > global_scale.length() / 2:
 		return 0 
 	var count = 0
-	var brush_top_left = global_position_to_local_grid(xy - Vector2.ONE * diameter / 2)
-	var brush_steps = global_scale_to_local_grid(Vector2.ONE * diameter)
+	var brush_top_left = global_position_to_local_grid(xy - Vector2.ONE * radius)
+	var brush_steps = global_scale_to_local_grid(Vector2.ONE * radius * 2)
 	for index in range(brush_steps.x * brush_steps.y):
 		var x = index % brush_steps.y
 		var y = index / brush_steps.y
 		var pos = brush_top_left + Vector2i(x, y)
-		if (local_grid_to_global_position(pos) - xy).length() < diameter / 2 and \
+		if (local_grid_to_global_position(pos) - xy).length() < radius and \
 			pos.x >= 0 and pos.x <= detail and \
 			pos.y >= 0 and pos.y <= detail:
-			edits[pos] = value
+			edits[pos] = (edits[pos] if pos in edits else 0) + delta
 			count += 1
 	return count
 
@@ -238,6 +238,6 @@ var lookup_geometry = {
 func _process(delta: float) -> void:
 	pass
 
-func _on_player_mine_down(player: Node2D) -> void:
-	if brush_value(player.get_node("RigidBody2D").global_position, 64, -0.5) > 0:
+func _on_player_mine_down(pos: Vector2, radius: float, delta: float) -> void:
+	if brush_value(pos, radius, delta) > 0:
 		generate()
