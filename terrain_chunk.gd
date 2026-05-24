@@ -76,7 +76,7 @@ func get_value(x: float, y: float) -> float:
 	if edit: return edit + noise.get_noise_2d(x, y)
 	return noise.get_noise_2d(x, y)
 	
-func brush_value(xy: Vector2, radius: int, delta: float):
+func brush_value(xy: Vector2, radius: float, delta: float):
 	if (xy - global_position - global_scale / 2).length() > global_scale.length() / 2:
 		return 0 
 	var count = 0
