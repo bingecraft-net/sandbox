@@ -37,6 +37,14 @@ lock_rotation = true
 [node name="Camera2D" type="Camera2D" parent="Player/RigidBody2D" unique_id=77251212]
 zoom = Vector2(2, 2)
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Player/RigidBody2D/Camera2D" unique_id=1092842885]
+offset_left = -276.0
+offset_top = -150.0
+offset_right = 28.0
+offset_bottom = -40.0
+text = "Movement: [WASD] or [Arrow Keys]
+Mine: [Enter]"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/RigidBody2D" unique_id=1008471303]
 shape = SubResource("CapsuleShape2D_ej658")
 
