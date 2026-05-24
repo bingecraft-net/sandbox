@@ -8,6 +8,19 @@ var container: Node2D
 
 var edits = {}
 
+
+class ColliderTool:
+	var static_body = StaticBody2D.new()
+	var buf = []
+	func add_vertex(vertex: Vector2):
+		buf.append(vertex)
+		if len(buf) == 3:
+			var collider = CollisionShape2D.new()
+			collider.shape = ConvexPolygonShape2D.new()
+			collider.shape.points = buf
+			static_body.add_child(collider)
+			buf.clear()
+
 func global_position_to_local_grid(_global_position: Vector2) -> Vector2i:
 	return global_scale_to_local_grid(_global_position - global_position)
 	
@@ -55,7 +68,7 @@ func generate() -> void:
 	st.set_color(Color.SADDLE_BROWN)
 	st.set_uv(Vector2(0, 0))
 	
-	var colliders = StaticBody2D.new()
+	var ct = ColliderTool.new()
 	
 	for index in range(detail * detail):
 		var x = index % detail
@@ -81,28 +94,21 @@ func generate() -> void:
 		point = global_position + global_scale * Vector2(x, y + 1) / detail
 		value = get_value(point.x, point.y)
 		if value >= iso: id += 8
-		
+				
 		var buf = []
 		
 		for vertex in lookup_geometry[id]:
 			vertex = vertex + Vector2(x, y)
 			vertex = vertex / detail
 			st.add_vertex(Vector3(vertex.x, vertex.y, 0))
-			
-			buf.append(vertex)
-			if len(buf) == 3:
-				var collider = CollisionShape2D.new()
-				collider.shape = ConvexPolygonShape2D.new()
-				collider.shape.points = buf
-				colliders.add_child(collider)
-				buf.clear()
+			ct.add_vertex(vertex)
 
 	
 	var mesh = MeshInstance2D.new()
 	mesh.mesh = st.commit()
 	container.add_child(mesh)
 	
-	container.add_child(colliders)
+	container.add_child(ct.static_body)
 	
 	if last_container:
 		last_container.queue_free()
