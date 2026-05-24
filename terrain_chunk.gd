@@ -10,16 +10,22 @@ var edits = {}
 
 
 class ColliderTool:
-	var static_body = StaticBody2D.new()
+	var shapes = []
 	var buf = []
 	func add_vertex(vertex: Vector2):
 		buf.append(vertex)
 		if len(buf) == 3:
+			shapes.append(buf)
+			buf = []
+	
+	func get_static_body():
+		var static_body = StaticBody2D.new()
+		for points in shapes:
 			var collider = CollisionShape2D.new()
 			collider.shape = ConvexPolygonShape2D.new()
-			collider.shape.points = buf
+			collider.shape.points = points
 			static_body.add_child(collider)
-			buf.clear()
+		return static_body
 
 func global_position_to_local_grid(_global_position: Vector2) -> Vector2i:
 	return global_scale_to_local_grid(_global_position - global_position)
@@ -108,7 +114,7 @@ func generate() -> void:
 	mesh.mesh = st.commit()
 	container.add_child(mesh)
 	
-	container.add_child(ct.static_body)
+	container.add_child(ct.get_static_body())
 	
 	if last_container:
 		last_container.queue_free()
