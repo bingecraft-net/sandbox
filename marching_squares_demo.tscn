@@ -42,7 +42,7 @@ offset_top = -150.0
 offset_right = 28.0
 offset_bottom = -40.0
 text = "Movement: [WASD] or [Arrow Keys]
-Mine: [Enter]"
+Mine: [Enter] or [Spacebar]"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/RigidBody2D" unique_id=1008471303]
 shape = SubResource("CapsuleShape2D_ej658")
