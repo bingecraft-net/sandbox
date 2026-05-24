@@ -10,7 +10,6 @@
 frequency = 0.002
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ej658"]
-friction = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ej658"]
 
