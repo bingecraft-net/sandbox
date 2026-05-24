@@ -238,6 +238,6 @@ var lookup_geometry = {
 func _process(delta: float) -> void:
 	pass
 
-func _on_player_mine_down(pos: Vector2, radius: float, delta: float) -> void:
+func _on_mining_tool_action(pos: Vector2, radius: float, delta: float) -> void:
 	if brush_value(pos, radius, delta) > 0:
 		generate()

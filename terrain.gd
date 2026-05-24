@@ -15,7 +15,7 @@ func _ready() -> void:
 		chunk.detail = detail
 		chunk.noise = noise
 		chunk.iso = iso
-		player_mine_down.connect(chunk._on_player_mine_down)
+		mining_tool_action.connect(chunk._on_mining_tool_action)
 		add_child(chunk)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-signal player_mine_down(pos: Vector2, radius: float, delta: float)
+signal mining_tool_action(pos: Vector2, radius: float, delta: float)	
 
-func _on_player_mine_down(pos: Vector2, radius: float, delta: float) -> void:
-	player_mine_down.emit(pos, radius, delta)
+func _on_mining_tool_action(pos: Vector2, radius: float, delta: float) -> void:
+	mining_tool_action.emit(pos, radius, delta)

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://0a757mly6syc" path="res://player.gd" id="1_5jqoh"]
 [ext_resource type="Texture2D" uid="uid://ch3o78ynvxeup" path="res://Player.png" id="2_ej658"]
 [ext_resource type="Script" uid="uid://bot13g1dghusg" path="res://terrain.gd" id="2_qsb6n"]
+[ext_resource type="Texture2D" uid="uid://cfnhqxpwpa144" path="res://MiningTool.png" id="4_8d1vx"]
+[ext_resource type="Script" uid="uid://ldd87no6mr28" path="res://mining_tool.gd" id="5_s12sg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qsb6n"]
 frequency = 0.002
@@ -41,4 +43,9 @@ shape = SubResource("CapsuleShape2D_ej658")
 [node name="Sprite2D" type="Sprite2D" parent="Player/RigidBody2D" unique_id=1073481637]
 texture = ExtResource("2_ej658")
 
-[connection signal="mine_down" from="Player" to="Terrain" method="_on_player_mine_down"]
+[node name="MiningTool" type="Sprite2D" parent="Player/RigidBody2D" unique_id=1207681998]
+position = Vector2(16, 0)
+texture = ExtResource("4_8d1vx")
+script = ExtResource("5_s12sg")
+
+[connection signal="action" from="Player/RigidBody2D/MiningTool" to="Terrain" method="_on_mining_tool_action"]
