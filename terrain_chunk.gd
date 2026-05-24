@@ -10,21 +10,53 @@ var edits = {}
 
 
 class ColliderTool:
-	var shapes = []
-	var buf = []
-	func add_vertex(vertex: Vector2):
-		buf.append(vertex)
-		if len(buf) == 3:
-			shapes.append(buf)
-			buf = []
+	var graph = {}
+	var working_tri = []
 	
-	func get_static_body():
+	
+	func add_vertex(vertex: Vector2):
+		working_tri.append(vertex)
+		if len(working_tri) == 3:
+			add_tri(working_tri)
+			working_tri = []
+	
+	
+	func add_tri(tri: Array):
+		for index in range(3):
+			var start = tri[index]
+			var end = tri[(index + 1) % 3]
+			graph[start] = graph[start] if start in graph else []
+			graph[start].append(end)
+
+	
+	func commit():
+		var graph_shake = {}
+		for start in graph:
+			for end in graph[start]:
+				if start not in graph[end]:
+					graph_shake[start] = graph_shake[start] if start in graph_shake else []
+					graph_shake[start].append(end)
+		graph = graph_shake
+
 		var static_body = StaticBody2D.new()
-		for points in shapes:
-			var collider = CollisionShape2D.new()
-			collider.shape = ConvexPolygonShape2D.new()
-			collider.shape.points = points
-			static_body.add_child(collider)
+
+		while len(graph) > 0:
+			var start
+			for _start in graph:
+				start = _start
+				break
+			var contour = []
+			while start != null:
+				contour.append(start)
+				var ends = graph.get(start)
+				graph.erase(start)
+				start = ends[0] if ends else null
+			
+			var polygon = CollisionPolygon2D.new()
+			polygon.build_mode = CollisionPolygon2D.BUILD_SEGMENTS
+			polygon.polygon = contour
+			static_body.add_child(polygon)
+		
 		return static_body
 
 func global_position_to_local_grid(_global_position: Vector2) -> Vector2i:
@@ -101,20 +133,17 @@ func generate() -> void:
 		value = get_value(point.x, point.y)
 		if value >= iso: id += 8
 				
-		var buf = []
-		
 		for vertex in lookup_geometry[id]:
 			vertex = vertex + Vector2(x, y)
 			vertex = vertex / detail
 			st.add_vertex(Vector3(vertex.x, vertex.y, 0))
 			ct.add_vertex(vertex)
-
 	
 	var mesh = MeshInstance2D.new()
 	mesh.mesh = st.commit()
 	container.add_child(mesh)
 	
-	container.add_child(ct.get_static_body())
+	container.add_child(ct.commit())
 	
 	if last_container:
 		last_container.queue_free()

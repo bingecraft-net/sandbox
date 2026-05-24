@@ -26,5 +26,5 @@ func _process(delta: float) -> void:
 		pos = pos.normalized()
 		position = pos * 16
 		
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_pressed("ui_accept"):
 		action.emit(global_position, 32, -0.1)
