@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+aws s3 sync export/ s3://games.bingecraft.net/sandbox/
