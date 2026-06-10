@@ -1,3 +1,49 @@
 [gd_scene format=3 uid="uid://dkrhsevv1ea1w"]
 
+[ext_resource type="Script" uid="uid://bj887t2jayvjw" path="res://node_2d.gd" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://cm6gndfoqrgrk" path="res://sprite/Sprite-0001.png" id="2_epypp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0e48y"]
+seed = 9
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hol4"]
+texture = ExtResource("2_epypp")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_q6r6c"]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_0hol4")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
+texture = ExtResource("2_epypp")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_epypp"]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_0e48y")
+
 [node name="Node2D" type="Node2D" unique_id=678312184]
+script = ExtResource("1_0e48y")
+noise = SubResource("FastNoiseLite_0e48y")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1011251049]
+tile_set = SubResource("TileSet_q6r6c")
+
+[node name="TileMapLayer_Direction" type="TileMapLayer" parent="." unique_id=1686228596]
+tile_set = SubResource("TileSet_epypp")
