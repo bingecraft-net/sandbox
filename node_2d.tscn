@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dsyy4mj82v3ii" path="res://sprite/Sprite-0001.png" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://c5oaecxt3ctpb" path="res://rigid_body_2d.gd" id="2_0e48y"]
 [ext_resource type="Texture2D" uid="uid://cqdq4p0sgcnw3" path="res://sprite/Sprite-0002.png" id="4_0hol4"]
+[ext_resource type="Texture2D" uid="uid://cb2gxxu7lgxih" path="res://sprite/Sprite-0003.png" id="5_q6r6c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
 texture = ExtResource("1_wtcfe")
@@ -32,19 +33,27 @@ texture = ExtResource("1_wtcfe")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0e48y")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wtcfe"]
-texture = ExtResource("1_wtcfe")
-0:0/0 = 0
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdubu"]
+texture = ExtResource("5_q6r6c")
 1:0/0 = 0
 2:0/0 = 0
-3:0/0 = 0
 0:1/0 = 0
-2:1/0 = 0
 1:1/0 = 0
+2:1/0 = 0
 3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:0/0 = 0
+3:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_0e48y"]
-sources/0 = SubResource("TileSetAtlasSource_wtcfe")
+sources/1 = SubResource("TileSetAtlasSource_kdubu")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wtcfe"]
 
@@ -69,7 +78,7 @@ lock_rotation = true
 script = ExtResource("2_0e48y")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="RigidBody2D" unique_id=1283870494]
-tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAD//wAAAAAAAAEAAAD/////AAACAAEAAAAAAP//AAADAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQACAAIAAAD//wAAAQABAAIAAAD/////AQABAAEAAAAAAP//AQACAAEAAAD+//7/AQAAAAAAAAD+////AQAAAAEAAAD+/wAAAQAAAAIAAAD+/wEAAQAAAAMAAAD///7/AQABAAAAAAD//wEAAQABAAMAAAAAAP7/AQACAAAAAAAAAAEAAQACAAMAAAABAP7/AQADAAAAAAABAP//AQADAAEAAAABAAAAAQADAAIAAAABAAEAAQADAAMAAAA=")
 tile_set = SubResource("TileSet_0e48y")
 
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D" unique_id=7131899]
