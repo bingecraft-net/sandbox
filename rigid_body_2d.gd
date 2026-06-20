@@ -27,5 +27,7 @@ func _process(delta: float) -> void:
 	
 	var h = Input.get_axis("ui_left", "ui_right")
 	$TileMapLayer.rotation += h * delta * steer
-	
-	
+	if $TileMapLayer.rotation > 2 * PI:
+		$TileMapLayer.rotation -= 2 * PI
+	elif $TileMapLayer.rotation < 0 :
+		$TileMapLayer.rotation += 2 * PI
