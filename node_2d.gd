@@ -30,11 +30,12 @@ func _process(delta: float) -> void:
 			$TileMapLayer.set_cell(coords)
 	
 	var text_lines = []
-	text_lines.append("Speed: %.0f" % $RigidBody2D.linear_velocity.length())
-	text_lines.append("Heading: %.0f" % ($RigidBody2D/TileMapLayer.rotation_degrees))
-	
-	text_lines.append("Inventory:")
+	text_lines.append("Ship:")
+	text_lines.append("  Thruster:")
+	text_lines.append("    Speed: %.0f" % $RigidBody2D.linear_velocity.length())
+	text_lines.append("    Heading: %.0f" % ($RigidBody2D/TileMapLayer.rotation_degrees))
+	text_lines.append("  Mining tool:")
 	for key in cargo:
-		text_lines.append("  %s: %s" % [lookup.get(key) if key in lookup else key, cargo.get(key)])
+		text_lines.append("    %s: %s" % [lookup.get(key) if key in lookup else key, cargo.get(key)])
 	
 	$CanvasLayer/Control/RichTextLabel.text = "[font_size=24]%s[/font_size]" % "\n".join(text_lines)
