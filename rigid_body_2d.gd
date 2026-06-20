@@ -5,9 +5,9 @@ extends RigidBody2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-@export var acceleration = 32
-@export var top_speed = 256
-@export var brake = 8
+@export var acceleration = 16
+@export var top_speed = 384
+@export var brake = 1
 @export var steer = 4
 
 var last_position
