@@ -37,4 +37,4 @@ func _process(delta: float) -> void:
 	for key in cargo:
 		text_lines.append("  %s: %s" % [lookup.get(key) if key in lookup else key, cargo.get(key)])
 	
-	$RigidBody2D/RichTextLabel.text = "\n".join(text_lines)
+	$CanvasLayer/Control/RichTextLabel.text = "[font_size=24]%s[/font_size]" % "\n".join(text_lines)
