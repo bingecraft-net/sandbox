@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cqdq4p0sgcnw3" path="res://sprite/Sprite-0002.png" id="4_0hol4"]
 [ext_resource type="Texture2D" uid="uid://cb2gxxu7lgxih" path="res://sprite/Sprite-0003.png" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://dcxet4k02kvew" path="res://camera_2d.gd" id="7_d21ai"]
+[ext_resource type="Script" uid="uid://cnjbi8ick15o7" path="res://rich_text_label_hud.gd" id="8_rj586"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
 texture = ExtResource("1_wtcfe")
@@ -59,8 +60,9 @@ sources/1 = SubResource("TileSetAtlasSource_kdubu")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wtcfe"]
 
-[node name="Node2D" type="Node2D" unique_id=190777238]
+[node name="Node2D" type="Node2D" unique_id=190777238 node_paths=PackedStringArray("ship")]
 script = ExtResource("1_epypp")
+ship = NodePath("RigidBody2D")
 
 [node name="Parallax2D-BlackField" type="Parallax2D" parent="." unique_id=1029100760]
 scroll_scale = Vector2(0, 0)
@@ -109,11 +111,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1123841733]
+[node name="RichTextLabel-HUD" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1123841733 node_paths=PackedStringArray("ship")]
 layout_mode = 0
 offset_right = 537.0
 offset_bottom = 536.0
 bbcode_enabled = true
+script = ExtResource("8_rj586")
+ship = NodePath("../../../RigidBody2D")
 
 [node name="RichTextLabel-Controls" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1917671431]
 layout_mode = 1

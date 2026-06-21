@@ -5,36 +5,18 @@ extends Node2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-var cargo = {}
-
-var lookup = {
-	Vector2i(0, 0): "Dense ore",
-	Vector2i(1, 0): "Ore",
-	Vector2i(2, 0): "Trace ore",
-	Vector2i(3, 0): "Medium",
-}
+@export var ship : Node2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var brush_diameter = 4
-	var tl = $RigidBody2D.position / 16 - Vector2.ONE * brush_diameter / 2
+	var tl = ship.position / 16 - Vector2.ONE * brush_diameter / 2
 	for index in range(brush_diameter * brush_diameter):
 		var coords = tl + Vector2(index % brush_diameter, index / brush_diameter)
 		var atlas_coords = 	$TileMapLayer.get_cell_atlas_coords(coords)
 		if atlas_coords != Vector2i(-1, -1):
-			var amount = cargo.get(atlas_coords)
+			var amount = ship.cargo.get(atlas_coords)
 			if not amount:
 				amount = 0
-			cargo.set(atlas_coords, amount + 1)
+			ship.cargo.set(atlas_coords, amount + 1)
 			$TileMapLayer.set_cell(coords)
-	
-	var text_lines = []
-	text_lines.append("Ship:")
-	text_lines.append("  Speed: %.0f" % $RigidBody2D.linear_velocity.length())
-	text_lines.append("  Heading: %.0f" % ($RigidBody2D/TileMapLayer.rotation_degrees))
-	text_lines.append("  Location: %.0v" % ($RigidBody2D.position / 16))
-	text_lines.append("  Cargo:")
-	for key in cargo:
-		text_lines.append("    %s: %s" % [lookup.get(key) if key in lookup else key, cargo.get(key)])
-	
-	$CanvasLayer/Control/RichTextLabel.text = "[font_size=24]%s[/font_size]" % "\n".join(text_lines)

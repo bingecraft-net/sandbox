@@ -10,6 +10,8 @@ func _ready() -> void:
 @export var brake = 2
 @export var steer = 4
 
+var cargo = {}
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
