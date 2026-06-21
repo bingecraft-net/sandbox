@@ -5,10 +5,10 @@ extends RigidBody2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-@export var acceleration = 8
+@export var thrust = 4
 @export var top_speed = 384
-@export var brake = 2
-@export var steer = 4
+@export var brake = 3
+@export var steer = 3
 
 var cargo = {}
 
@@ -17,8 +17,11 @@ func _process(delta: float) -> void:
 	
 	var throttle = Input.get_axis("ui_up", "ui_down")
 	if throttle != 0:
-		apply_central_impulse(throttle * Vector2.UP.rotated($TileMapLayer.rotation) * acceleration)
-		apply_central_impulse(linear_velocity.normalized() * min(0, top_speed - linear_velocity.length()))
+		var velocity_correction = throttle * Vector2.UP.rotated($TileMapLayer.rotation) * top_speed - linear_velocity
+		if velocity_correction.length() > thrust:
+			apply_central_impulse(velocity_correction.normalized() * thrust)
+		else:
+			apply_central_impulse(velocity_correction)
 	elif linear_velocity.length() >= brake:
 		apply_central_impulse(-linear_velocity.normalized() * brake)
 	else:
