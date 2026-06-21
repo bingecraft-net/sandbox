@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	var text_lines = []
 	text_lines.append("Ship:")
 	text_lines.append("  Speed: %.0f" % ship.linear_velocity.length())
-	text_lines.append("  Heading: %.0f" % (ship.get_node("TileMapLayer").rotation_degrees))
+	text_lines.append("  Heading: %.0f" % (ship.rotation_degrees))
 	text_lines.append("  Location: %.0v" % (ship.position / 16))
 	text_lines.append("  Cargo:")
 	for key in ship.cargo:
