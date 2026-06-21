@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dcwsp8qcna0cw" path="res://sprite/Parallax-Rock.png" id="3_kdubu"]
 [ext_resource type="Texture2D" uid="uid://cqdq4p0sgcnw3" path="res://sprite/Sprite-0002.png" id="4_0hol4"]
 [ext_resource type="Texture2D" uid="uid://cb2gxxu7lgxih" path="res://sprite/Sprite-0003.png" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://dykd6j26aqh8f" path="res://tile_map_layer_ship.gd" id="7_4d7sh"]
 [ext_resource type="Script" uid="uid://dcxet4k02kvew" path="res://camera_2d.gd" id="7_d21ai"]
 [ext_resource type="Script" uid="uid://cnjbi8ick15o7" path="res://rich_text_label_hud.gd" id="8_rj586"]
 
@@ -56,7 +57,7 @@ texture = ExtResource("5_q6r6c")
 3:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_0e48y"]
-sources/1 = SubResource("TileSetAtlasSource_kdubu")
+sources/0 = SubResource("TileSetAtlasSource_kdubu")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wtcfe"]
 radius = 32.0
@@ -89,10 +90,10 @@ tile_set = SubResource("TileSet_epypp")
 gravity_scale = 0.0
 script = ExtResource("2_0e48y")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="RigidBody2D" unique_id=1283870494]
-position = Vector2(-1, 0)
-tile_map_data = PackedByteArray("AAAAAAAAAQACAAIAAAD//wAAAQABAAIAAAD/////AQABAAEAAAAAAP//AQACAAEAAAD+//7/AQAAAAAAAAD+////AQAAAAEAAAD+/wAAAQAAAAIAAAD+/wEAAQAAAAMAAAD///7/AQABAAAAAAD//wEAAQABAAMAAAAAAP7/AQACAAAAAAAAAAEAAQACAAMAAAABAP7/AQADAAAAAAABAP//AQADAAEAAAABAAAAAQADAAIAAAABAAEAAQADAAMAAAA=")
+[node name="TileMapLayer-Ship" type="TileMapLayer" parent="RigidBody2D" unique_id=1283870494]
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAIAAAD//wAAAAABAAIAAAD/////AAABAAEAAAAAAP//AAACAAEAAAD+//7/AAAAAAAAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAD///7/AAABAAAAAAD//wEAAAABAAMAAAAAAP7/AAACAAAAAAAAAAEAAAACAAMAAAABAP7/AAADAAAAAAABAP//AAADAAEAAAABAAAAAAADAAIAAAABAAEAAAADAAMAAAA=")
 tile_set = SubResource("TileSet_0e48y")
+script = ExtResource("7_4d7sh")
 
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D" unique_id=7131899]
 zoom = Vector2(2, 2)
