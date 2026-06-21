@@ -5,28 +5,25 @@ extends RigidBody2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-@export var acceleration = 16
+@export var acceleration = 8
 @export var top_speed = 384
-@export var brake = 1
+@export var brake = 2
 @export var steer = 4
-
-var last_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	var v = Input.get_axis("ui_up", "ui_down")
-	if v != 0:
-		var linear_acceleration = v * Vector2.UP.rotated($TileMapLayer.rotation)
-		linear_velocity += linear_acceleration.normalized() * acceleration
-		linear_velocity += linear_velocity.normalized() * min(0, top_speed - linear_velocity.length())
+	var throttle = Input.get_axis("ui_up", "ui_down")
+	if throttle != 0:
+		apply_central_impulse(throttle * Vector2.UP.rotated($TileMapLayer.rotation) * acceleration)
+		apply_central_impulse(linear_velocity.normalized() * min(0, top_speed - linear_velocity.length()))
 	elif linear_velocity.length() >= brake:
-		linear_velocity -= linear_velocity.normalized() * brake
+		apply_central_impulse(-linear_velocity.normalized() * brake)
 	else:
-		linear_velocity = Vector2.ZERO
+		apply_central_impulse(-linear_velocity)
 	
-	var h = Input.get_axis("ui_left", "ui_right")
-	$TileMapLayer.rotation += h * delta * steer
+	var steer_input = Input.get_axis("ui_left", "ui_right")
+	$TileMapLayer.rotation += steer_input * delta * steer
 	if $TileMapLayer.rotation > 2 * PI:
 		$TileMapLayer.rotation -= 2 * PI
 	elif $TileMapLayer.rotation < 0 :
