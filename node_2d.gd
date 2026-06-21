@@ -30,10 +30,10 @@ func _process(delta: float) -> void:
 	
 	var text_lines = []
 	text_lines.append("Ship:")
-	text_lines.append("  Thruster:")
-	text_lines.append("    Speed: %.0f" % $RigidBody2D.linear_velocity.length())
-	text_lines.append("    Heading: %.0f" % ($RigidBody2D/TileMapLayer.rotation_degrees))
-	text_lines.append("  Mining tool:")
+	text_lines.append("  Speed: %.0f" % $RigidBody2D.linear_velocity.length())
+	text_lines.append("  Heading: %.0f" % ($RigidBody2D/TileMapLayer.rotation_degrees))
+	text_lines.append("  Location: %.0v" % ($RigidBody2D.position / 16))
+	text_lines.append("  Cargo:")
 	for key in cargo:
 		text_lines.append("    %s: %s" % [lookup.get(key) if key in lookup else key, cargo.get(key)])
 	
