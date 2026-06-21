@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dcwsp8qcna0cw" path="res://sprite/Parallax-Rock.png" id="3_kdubu"]
 [ext_resource type="Texture2D" uid="uid://cqdq4p0sgcnw3" path="res://sprite/Sprite-0002.png" id="4_0hol4"]
 [ext_resource type="Texture2D" uid="uid://cb2gxxu7lgxih" path="res://sprite/Sprite-0003.png" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://dcxet4k02kvew" path="res://camera_2d.gd" id="7_d21ai"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
 texture = ExtResource("1_wtcfe")
@@ -93,6 +94,7 @@ tile_set = SubResource("TileSet_0e48y")
 
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D" unique_id=7131899]
 zoom = Vector2(2, 2)
+script = ExtResource("7_d21ai")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=788019535]
 shape = SubResource("CircleShape2D_wtcfe")
@@ -113,12 +115,12 @@ offset_right = 537.0
 offset_bottom = 536.0
 bbcode_enabled = true
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1917671431]
+[node name="RichTextLabel-Controls" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1917671431]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -508.0
+offset_left = -1107.0
 offset_bottom = 465.0
 grow_horizontal = 0
 bbcode_enabled = true
@@ -126,5 +128,6 @@ text = "[font_size=24]Controls:
 Throttle: <Up ArrowKey>
 Reverse: <Down ArrowKey>
 Steer: <Left ArrowKey> and <Right ArrowKey>
+Zoom: <PageDown> and <PageUp>
 [/font_size]"
 horizontal_alignment = 2
