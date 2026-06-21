@@ -16,9 +16,8 @@ var lookup = {
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var brush_diameter = 3
-	var mining_tool = $RigidBody2D.position + 16 * Vector2.DOWN.rotated($RigidBody2D/TileMapLayer.rotation)
-	var tl = mining_tool / 16 - Vector2.ONE * brush_diameter / 2
+	var brush_diameter = 4
+	var tl = $RigidBody2D.position / 16 - Vector2.ONE * brush_diameter / 2
 	for index in range(brush_diameter * brush_diameter):
 		var coords = tl + Vector2(index % brush_diameter, index / brush_diameter)
 		var atlas_coords = 	$TileMapLayer.get_cell_atlas_coords(coords)
