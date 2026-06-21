@@ -9,8 +9,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var brush_diameter = 4
-	var tl = ship.position / 16 - Vector2.ONE * brush_diameter / 2
+	var brush_diameter = 5
+	var tl = ship.position / 16 - Vector2.ONE * brush_diameter / 2 + Vector2.ONE / 2
 	for index in range(brush_diameter * brush_diameter):
 		var coords = tl + Vector2(index % brush_diameter, index / brush_diameter)
 		var atlas_coords = 	$TileMapLayer.get_cell_atlas_coords(coords)
