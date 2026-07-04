@@ -59,8 +59,9 @@ texture = ExtResource("5_q6r6c")
 [sub_resource type="TileSet" id="TileSet_0e48y"]
 sources/0 = SubResource("TileSetAtlasSource_kdubu")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wtcfe"]
-radius = 32.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4d7sh"]
+radius = 21.0
+height = 56.0
 
 [node name="Node2D" type="Node2D" unique_id=190777238 node_paths=PackedStringArray("ship")]
 script = ExtResource("1_epypp")
@@ -101,7 +102,7 @@ zoom = Vector2(2, 2)
 script = ExtResource("7_d21ai")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=788019535]
-shape = SubResource("CircleShape2D_wtcfe")
+shape = SubResource("CapsuleShape2D_4d7sh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1233851170]
 
