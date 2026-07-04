@@ -91,6 +91,7 @@ gravity_scale = 0.0
 script = ExtResource("2_0e48y")
 
 [node name="TileMapLayer-Ship" type="TileMapLayer" parent="RigidBody2D" unique_id=1283870494]
+position = Vector2(0, -8)
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAIAAAD//wAAAAABAAIAAAD/////AAABAAEAAAAAAP//AAACAAEAAAD+//7/AAAAAAAAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAD///7/AAABAAAAAAD//wEAAAABAAMAAAAAAP7/AAACAAAAAAAAAAEAAAACAAMAAAABAP7/AAADAAAAAAABAP//AAADAAEAAAABAAAAAAADAAIAAAABAAEAAAADAAMAAAA=")
 tile_set = SubResource("TileSet_0e48y")
 script = ExtResource("7_4d7sh")
