@@ -1,3 +1,35 @@
 [gd_scene format=3 uid="uid://dkrhsevv1ea1w"]
 
+[ext_resource type="Script" uid="uid://bdqcvqais204k" path="res://node_2d.gd" id="1_epypp"]
+[ext_resource type="Script" uid="uid://hkyocwsg23rp" path="res://ship.gd" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://bds8asf0vye1c" path="res://sprites/elements.png" id="2_0hol4"]
+[ext_resource type="Script" uid="uid://c1brx6etltkl0" path="res://tile_map_layer.gd" id="4_q6r6c"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6r6c"]
+texture = ExtResource("2_0hol4")
+1:1/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_d21ai"]
+sources/0 = SubResource("TileSetAtlasSource_q6r6c")
+
 [node name="Node2D" type="Node2D" unique_id=190777238]
+script = ExtResource("1_epypp")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1306532677]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_d21ai")
+script = ExtResource("4_q6r6c")
+
+[node name="Ship" type="Node2D" parent="." unique_id=2121773373]
+script = ExtResource("1_wtcfe")
+speed = 2048
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ship" unique_id=1962124629]
+offset_left = -256.0
+offset_right = -56.0
+offset_bottom = 40.0
+bbcode_enabled = true
+fit_content = true
+
+[node name="Camera2D" type="Camera2D" parent="Ship" unique_id=1371353492]
