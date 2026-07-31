@@ -1,21 +1,9 @@
 [gd_scene format=3 uid="uid://dkrhsevv1ea1w"]
 
 [ext_resource type="Script" uid="uid://bdqcvqais204k" path="res://node_2d.gd" id="1_epypp"]
-[ext_resource type="Texture2D" uid="uid://bmefgl2bwnnl" path="res://sprites/terrain.png" id="2_0hol4"]
+[ext_resource type="PackedScene" uid="uid://d3rhwrnccunoi" path="res://terrain.tscn" id="3_0hol4"]
 [ext_resource type="Script" uid="uid://c1brx6etltkl0" path="res://terrain.gd" id="4_q6r6c"]
 [ext_resource type="Script" uid="uid://c5oaecxt3ctpb" path="res://rigid_body_2d.gd" id="5_kdubu"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6r6c"]
-texture = ExtResource("2_0hol4")
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:0/0 = 0
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="TileSet" id="TileSet_d21ai"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_q6r6c")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
 
@@ -25,9 +13,9 @@ script = ExtResource("1_epypp")
 [node name="Terrain" type="Node2D" parent="." unique_id=273111418]
 script = ExtResource("4_q6r6c")
 
-[node name="SubTerrain" type="TileMapLayer" parent="Terrain" unique_id=2068483748]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-tile_set = SubResource("TileSet_d21ai")
+[node name="SubTerrain" parent="Terrain" unique_id=15364741 instance=ExtResource("3_0hol4")]
+
+[node name="SupTerrain" parent="Terrain" unique_id=206810307 instance=ExtResource("3_0hol4")]
 
 [node name="Ship" type="Node2D" parent="." unique_id=2121773373]
 
