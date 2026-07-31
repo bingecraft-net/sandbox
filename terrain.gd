@@ -27,7 +27,7 @@ func load_chunk(chunk_coords: Vector2i) -> void:
 			var local_cell_coords = Vector2i(index % chunk_size, index / chunk_size)
 			var cell_coords = chunk_size * chunk_coords + local_cell_coords
 			var atlas_coords = sample(cell_coords)
-			$TileMapLayer.set_cell(cell_coords, 0, atlas_coords)
+			$SubTerrain.set_cell(cell_coords, 0, atlas_coords)
 		chunks[chunk_coords] = 0
 		
 		
