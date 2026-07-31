@@ -33,8 +33,9 @@ func load_chunk(chunk_coords: Vector2i) -> void:
 		
 func sample(cell_coords: Vector2) -> Vector2i:
 	var name = "Empty"
-	if cell_coords.length() < 64:
+	var magnitude = cell_coords.length() + 16 * sin(8 * cell_coords.angle())
+	if magnitude < 64:
 		name = "Fill"
-	elif cell_coords.length() < 128:
+	elif magnitude < 128:
 		name = "Atmosphere"
 	return atlas_coords_by_name.get(name)
