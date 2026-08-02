@@ -15,8 +15,6 @@ script = ExtResource("4_q6r6c")
 
 [node name="SubTerrain" parent="Terrain" unique_id=15364741 instance=ExtResource("3_0hol4")]
 
-[node name="SupTerrain" parent="Terrain" unique_id=206810307 instance=ExtResource("3_0hol4")]
-
 [node name="Ship" type="Node2D" parent="." unique_id=2121773373]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Ship" unique_id=781675067]
