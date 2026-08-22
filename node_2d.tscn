@@ -1,11 +1,85 @@
-[gd_scene format=3 uid="uid://dkrhsevv1ea1w"]
+[gd_scene format=4 uid="uid://dkrhsevv1ea1w"]
 
 [ext_resource type="Script" uid="uid://bdqcvqais204k" path="res://node_2d.gd" id="1_epypp"]
 [ext_resource type="PackedScene" uid="uid://d3rhwrnccunoi" path="res://terrain.tscn" id="3_0hol4"]
 [ext_resource type="Script" uid="uid://c1brx6etltkl0" path="res://terrain.gd" id="4_q6r6c"]
-[ext_resource type="Script" uid="uid://c5oaecxt3ctpb" path="res://rigid_body_2d.gd" id="5_kdubu"]
+[ext_resource type="Script" uid="uid://c5oaecxt3ctpb" path="res://ship.gd" id="5_kdubu"]
+[ext_resource type="Texture2D" uid="uid://bjyugkh84i3hl" path="res://sprites/ship.png" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://bwt6c01ndw7j" path="res://tire.gd" id="6_kdubu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdubu"]
+texture = ExtResource("5_q6r6c")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+7:1/0 = 0
+7:2/0 = 0
+6:2/0 = 0
+6:3/0 = 0
+7:0/0 = 0
+6:0/0 = 0
+5:0/0 = 0
+4:0/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+7:6/0 = 0
+7:5/0 = 0
+7:4/0 = 0
+7:3/0 = 0
+5:1/0 = 0
+4:1/0 = 0
+3:2/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+2:0/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+1:5/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+6:6/0 = 0
+5:6/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+6:4/0 = 0
+5:4/0 = 0
+4:4/0 = 0
+3:4/0 = 0
+2:4/0 = 0
+1:4/0 = 0
+5:3/0 = 0
+4:3/0 = 0
+6:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_d21ai"]
+sources/0 = SubResource("TileSetAtlasSource_kdubu")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q6r6c"]
 
 [node name="Node2D" type="Node2D" unique_id=190777238]
 script = ExtResource("1_epypp")
@@ -16,22 +90,47 @@ script = ExtResource("4_q6r6c")
 [node name="SubTerrain" parent="Terrain" unique_id=15364741 instance=ExtResource("3_0hol4")]
 
 [node name="Ship" type="Node2D" parent="." unique_id=2121773373]
-
-[node name="RigidBody2D" type="RigidBody2D" parent="Ship" unique_id=781675067]
-gravity_scale = 0.0
-lock_rotation = true
-linear_damp = 1.0
 script = ExtResource("5_kdubu")
-magnitude = 64000
+thrust = 65536
+turn = 256
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Ship/RigidBody2D" unique_id=1962124629]
+[node name="Node2D" type="Node2D" parent="Ship" unique_id=1702725760]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ship/Node2D" unique_id=1962124629]
 offset_left = -256.0
 offset_right = -56.0
 offset_bottom = 40.0
 bbcode_enabled = true
 fit_content = true
 
-[node name="Camera2D" type="Camera2D" parent="Ship/RigidBody2D" unique_id=1371353492]
+[node name="Hull" type="RigidBody2D" parent="Ship" unique_id=781675067]
+mass = 0.001
+gravity_scale = 0.0
+linear_damp = 1.0
+angular_damp = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/RigidBody2D" unique_id=1291151525]
+[node name="Camera2D" type="Camera2D" parent="Ship/Hull" unique_id=1371353492]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/Hull" unique_id=1291151525]
 shape = SubResource("CircleShape2D_q6r6c")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Ship/Hull" unique_id=1599582758]
+tile_map_data = PackedByteArray("AAD/////AAADAAMAAAD//wAAAAADAAQAAAAAAP//AAAEAAMAAAAAAAAAAAAEAAQAAAD8//z/AAAAAAAAAAD8//3/AAAAAAEAAAD8//7/AAAAAAIAAAD8////AAAAAAMAAAD8/wAAAAAAAAQAAAD8/wEAAAAAAAUAAAD8/wIAAAAAAAYAAAD8/wMAAAAAAAcAAAD9//z/AAABAAAAAAD9//3/AAABAAEAAAD9//7/AAABAAIAAAD9////AAABAAMAAAD9/wAAAAABAAQAAAD9/wEAAAABAAUAAAD9/wIAAAABAAYAAAD9/wMAAAABAAcAAAD+//z/AAACAAAAAAD+//3/AAACAAEAAAD+//7/AAACAAIAAAD+////AAACAAMAAAD+/wAAAAACAAQAAAD+/wEAAAACAAUAAAD+/wIAAAACAAYAAAD+/wMAAAACAAcAAAD///z/AAADAAAAAAD///3/AAADAAEAAAD///7/AAADAAIAAAD//wEAAAADAAUAAAD//wIAAAADAAYAAAD//wMAAAADAAcAAAAAAPz/AAAEAAAAAAAAAP3/AAAEAAEAAAAAAP7/AAAEAAIAAAAAAAEAAAAEAAUAAAAAAAIAAAAEAAYAAAAAAAMAAAAEAAcAAAABAPz/AAAFAAAAAAABAP3/AAAFAAEAAAABAP7/AAAFAAIAAAABAP//AAAFAAMAAAABAAAAAAAFAAQAAAABAAEAAAAFAAUAAAABAAIAAAAFAAYAAAABAAMAAAAFAAcAAAACAPz/AAAGAAAAAAACAP3/AAAGAAEAAAACAP7/AAAGAAIAAAACAP//AAAGAAMAAAACAAAAAAAGAAQAAAACAAEAAAAGAAUAAAACAAIAAAAGAAYAAAACAAMAAAAGAAcAAAADAPz/AAAHAAAAAAADAP3/AAAHAAEAAAADAP7/AAAHAAIAAAADAP//AAAHAAMAAAADAAAAAAAHAAQAAAADAAEAAAAHAAUAAAADAAIAAAAHAAYAAAADAAMAAAAHAAcAAAA=")
+tile_set = SubResource("TileSet_d21ai")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship/Hull" unique_id=1373693534]
+remote_path = NodePath("../../Node2D")
+update_rotation = false
+
+[node name="Tire" type="RigidBody2D" parent="Ship" unique_id=1555074166]
+position = Vector2(100, 0)
+gravity_scale = 0.0
+script = ExtResource("6_kdubu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/Tire" unique_id=146331953]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_q6r6c")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Ship" unique_id=1059661192]
+node_a = NodePath("../Hull")
+node_b = NodePath("../Tire")
