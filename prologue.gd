@@ -10,9 +10,12 @@ var prologue = [
 
 var call_to_action = "Press LMB"
 
+var target = preload("res://hangar04.tscn").instantiate()
+
 func advance():
 	if index >= len(prologue):
 		hide()
+		get_tree().root.add_child(target)
 	if not visible:
 		return
 	$RichTextLabel.text = format(prologue[index] + "\n\n" + call_to_action)
