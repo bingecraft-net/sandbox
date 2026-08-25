@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://csqhi0lhlsxwy"]
+
+[ext_resource type="Script" uid="uid://bmo6kjmggc5qm" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dkrhsevv1ea1w" path="res://prologue.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dpds3vamxatoi" path="res://hangar04.tscn" id="3_1bvp3"]
+
+[node name="Node2D_main" type="Node2D" unique_id=589923785]
+script = ExtResource("1_ig7tw")
+
+[node name="Node2D_Prologue" parent="." unique_id=190777238 instance=ExtResource("2_h2yge")]
+
+[node name="Node2D_Hangar04" parent="." unique_id=929627046 instance=ExtResource("3_1bvp3")]
+visible = false
+
+[connection signal="hidden" from="Node2D_Prologue" to="." method="_on_node_2d_prologue_hidden"]
