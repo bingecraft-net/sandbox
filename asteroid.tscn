@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bu83h6ktlwxe2"]
+
+[ext_resource type="Script" uid="uid://bww33jubm8bcm" path="res://asteroid.gd" id="1_u87q6"]
+[ext_resource type="Texture2D" uid="uid://x26iadof0lb5" path="res://sprites/foreground.png" id="2_p0ukn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mc61r"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gm5ib"]
+texture = ExtResource("2_p0ukn")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8gfwb"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_gm5ib")
+
+[node name="Node2D_Asteroid" type="Node2D" unique_id=351208642]
+script = ExtResource("1_u87q6")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=732528799]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1672608417]
+shape = SubResource("CircleShape2D_mc61r")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1931166918]
+tile_set = SubResource("TileSet_8gfwb")
