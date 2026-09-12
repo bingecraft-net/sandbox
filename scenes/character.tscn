@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://1b62wt0iucbm"]
+
+[ext_resource type="Script" uid="uid://h5j6jfls0e03" path="res://scripts/character.gd" id="1_glpr6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc0e3"]
+
+[node name="Node2D_Character" type="Node2D" unique_id=1530174143]
+script = ExtResource("1_glpr6")
+speed = 1024
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1024995615]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1793667200]
+shape = SubResource("CircleShape2D_fc0e3")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=510371124]
