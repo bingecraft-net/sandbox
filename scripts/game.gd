@@ -44,26 +44,26 @@ func tick():
 					var neighbor_x = (x + dx + grid_size) % grid_size
 					var neighbor_y = (y + dy + grid_size) % grid_size
 					var neighbor_value = grid[neighbor_x][neighbor_y]
-					e_laplacian += (neighbor_value.energy_density - e) / 8.
+					e_laplacian += (neighbor_value.energy_density - e) / 4.
 			
 			e += e_laplacian * timer.wait_time
 			
-			# warm energy always condenses into matter
-			var min_condensation_energy = .75
-			var condensation_factor = pow(1.1, max(0, e - min_condensation_energy)) - 1.
-			if e > timer.wait_time * condensation_factor:
-				e -= timer.wait_time * condensation_factor
-				m += timer.wait_time * condensation_factor
+			# smooth condensation (energy → matter)
+			var condensation_rate = smoothstep(0.0, 1.0, (e - 0.65) / 0.2)
+			var condense_amount = condensation_rate * timer.wait_time
+			if e >= condense_amount:
+				e -= condense_amount
+				m += condense_amount
 			else:
 				m += e
 				e = 0
 			
-			# hot matter dissociates into energy
-			var min_melt_energy = .875
-			var melting_factor = pow(1.2, max(0, e - min_melt_energy)) - 1.
-			if m >= timer.wait_time * melting_factor:
-				e += timer.wait_time * melting_factor
-				m -= timer.wait_time * melting_factor
+			# smooth melting (matter → energy)
+			var melting_rate = smoothstep(0.0, 1.0, (m - 0.75) / 0.2)
+			var melt_amount = melting_rate * timer.wait_time
+			if m >= melt_amount:
+				e += melt_amount
+				m -= melt_amount
 			else:
 				e += m
 				m = 0
@@ -83,7 +83,7 @@ func tick():
 	grid = next_grid
 	next_grid = old_grid
 	
-	label.text = "%.0f[%.2f, %.2f]" % [total, total_energy / total * 100, (total - total_energy) / total * 100]
+	label.text = "%.0f[%.2f, %.2f]" % [total, total_energy, total - total_energy]
 
 
 class Cell:
@@ -94,6 +94,6 @@ class Cell:
 		var e = energy_density
 		var m = mass_density
 		return Vector2i(
-			0 if e <= 0 else 1 if e <= .875 else 2 if e <= 1.01 else 3 ,
-			0 if m <= 0 else 1 if m <= 0.5 else 2,
+			0 if e <= 0 else 1 if e <= .65 else 2 if e <= .75 else 3 ,
+			0 if m <= 0 else 1 if m <= 0.75 else 2,
 		)
