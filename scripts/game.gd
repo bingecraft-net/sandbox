@@ -16,9 +16,9 @@ func _ready() -> void:
 		grid.append([])
 		next_grid.append([])
 		for y in range(grid_size):
+			var value = Cell.new()
 			var sample = noise.get_noise_2d(x, y)
-			var energy_density = 4 * clamp(sample, 0, 1)
-			var value = Cell.new(energy_density, 0.)
+			value.energy_density = 4 * clamp(sample, 0, 1)
 			grid[x].append(value)
 			next_grid[x].append(Cell.new())
 
@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 			next_value.mass_density = m
 
 			var coords = crs.forward(x, y)
-			var atlas_coords = classify(next_value)
+			var atlas_coords = next_value.classify()
 			tile_map_layer.set_cell(coords, 0, atlas_coords)
 
 	var	old_grid = grid
@@ -70,10 +70,14 @@ class CoordinateReferenceSystem:
 		return Vector2i(x, y) - Vector2i.ONE * grid_size / 2
 
 
-func classify(value: Cell) -> Vector2i:
-	var e = value.energy_density
-	var m = value.mass_density
-	return Vector2i(
-		0 if e <= 0 else 1 if e <= 1. else 2,
-		0 if m <= 0 else 1 if m <= .1 else 2,
-	)
+class Cell:
+	var energy_density: float = 0.0
+	var mass_density: float = 0.0
+	
+	func classify() -> Vector2i:
+		var e = energy_density
+		var m = mass_density
+		return Vector2i(
+			0 if e <= 0 else 1 if e <= 1. else 2,
+			0 if m <= 0 else 1 if m <= .1 else 2,
+		)
