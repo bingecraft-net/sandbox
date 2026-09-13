@@ -281,4 +281,8 @@ tile_set = SubResource("TileSet_lbhrr")
 wait_time = 0.05
 autostart = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1477791892]
+offset_right = 528.0
+offset_bottom = 406.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

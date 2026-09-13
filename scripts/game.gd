@@ -1,15 +1,15 @@
 extends Node2D
 
+
 @export var grid_size: int = 64
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var timer: Timer = $Timer
+@onready var label: RichTextLabel = $RichTextLabel
 
 var grid: Array[Array] = []
 var next_grid: Array[Array] = []
-var crs: CoordinateReferenceSystem = CoordinateReferenceSystem.new(grid_size)
-
 
 func _ready() -> void:
 	for x in range(grid_size):
@@ -27,6 +27,8 @@ func _on_timer_timeout() -> void:
 	tick()
 
 func tick():
+	var total = 0.
+	var total_energy = 0.
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var current_value: Cell = grid[x][y]
@@ -43,40 +45,45 @@ func tick():
 					var neighbor_y = (y + dy + grid_size) % grid_size
 					var neighbor_value = grid[neighbor_x][neighbor_y]
 					e_laplacian += (neighbor_value.energy_density - e) / 8.
-
-			e += e_laplacian * timer.wait_time
-
-			# energy condenses into matter
-			if e > 1.:
-				e -= timer.wait_time * .1
-				m += timer.wait_time * .1
 			
-			# matter dissociates into energy
-			if e > 1.01:
-				e += timer.wait_time * .1
-				m -= timer.wait_time * .1
-
+			e += e_laplacian * timer.wait_time
+			
+			# warm energy always condenses into matter
+			var min_condensation_energy = .75
+			var condensation_factor = pow(1.1, max(0, e - min_condensation_energy)) - 1.
+			if e > timer.wait_time * condensation_factor:
+				e -= timer.wait_time * condensation_factor
+				m += timer.wait_time * condensation_factor
+			else:
+				m += e
+				e = 0
+			
+			# hot matter dissociates into energy
+			var min_melt_energy = .875
+			var melting_factor = pow(1.2, max(0, e - min_melt_energy)) - 1.
+			if m >= timer.wait_time * melting_factor:
+				e += timer.wait_time * melting_factor
+				m -= timer.wait_time * melting_factor
+			else:
+				e += m
+				m = 0
+			
 			var next_value: Cell = next_grid[x][y]
 			next_value.energy_density = e
 			next_value.mass_density = m
+			
+			total += e + m
+			total_energy += e
 
-			var coords = crs.forward(x, y)
+			var coords = Vector2i(x, y)
 			var atlas_coords = next_value.classify()
 			tile_map_layer.set_cell(coords, 0, atlas_coords)
 
 	var	old_grid = grid
 	grid = next_grid
 	next_grid = old_grid
-
-
-class CoordinateReferenceSystem:
-	var grid_size: int
-		
-	func _init(s: int = 1):
-		grid_size = s
-		
-	func forward(x: float, y: float) -> Vector2i:
-		return Vector2i(x, y) - Vector2i.ONE * grid_size / 2
+	
+	label.text = "%.0f[%.2f, %.2f]" % [total, total_energy / total * 100, (total - total_energy) / total * 100]
 
 
 class Cell:
@@ -88,5 +95,5 @@ class Cell:
 		var m = mass_density
 		return Vector2i(
 			0 if e <= 0 else 1 if e <= .875 else 2 if e <= 1.01 else 3 ,
-			0 if m <= 0 else 1 if m <= .3 else 2,
+			0 if m <= 0 else 1 if m <= 0.5 else 2,
 		)
