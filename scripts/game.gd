@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 					var neighbor_value = grid[neighbor_x][neighbor_y]
 					e_laplacian += (neighbor_value.energy_density - e)
 
-			e += e_laplacian * dt
+			e += e_laplacian * dt * delta
 
 			if abs(e - 1.) < 0.01:
 				e -= 0.01
