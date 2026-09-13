@@ -9,8 +9,11 @@ extends Node2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	character_body.velocity = input * speed
+	character_body.velocity = input * speed * pow(1.1, -camera.zoom.length())
 	character_body.move_and_slide()
+	
+	var zoom = Input.get_axis("zoom out", "zoom in")
+	camera.zoom *= pow(2, delta * zoom)
 
 
 func _physics_process(delta: float) -> void:
