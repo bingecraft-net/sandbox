@@ -46,9 +46,15 @@ func tick():
 
 			e += e_laplacian * timer.wait_time
 
-			if abs(e - 1.) < 0.01:
-				e -= 0.01
-				m += 0.01
+			# energy condenses into matter
+			if e > 1.:
+				e -= timer.wait_time * .1
+				m += timer.wait_time * .1
+			
+			# matter dissociates into energy
+			if e > 1.01:
+				e += timer.wait_time * .1
+				m -= timer.wait_time * .1
 
 			var next_value: Cell = next_grid[x][y]
 			next_value.energy_density = e
@@ -81,6 +87,6 @@ class Cell:
 		var e = energy_density
 		var m = mass_density
 		return Vector2i(
-			0 if e <= 0 else 1 if e <= 1. else 2,
-			0 if m <= 0 else 1 if m <= .1 else 2,
+			0 if e <= 0 else 1 if e <= .875 else 2 if e <= 1.01 else 3 ,
+			0 if m <= 0 else 1 if m <= .3 else 2,
 		)
