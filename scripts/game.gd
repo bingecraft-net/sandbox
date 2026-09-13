@@ -13,14 +13,14 @@ var crs: CoordinateReferenceSystem = CoordinateReferenceSystem.new(grid_size)
 
 func _ready() -> void:
 	for x in range(grid_size):
-		grid.append([])
-		next_grid.append([])
+		grid.push_back([])
+		next_grid.push_back([])
 		for y in range(grid_size):
 			var value = Cell.new()
 			var sample = noise.get_noise_2d(x, y)
 			value.energy_density = 4 * clamp(sample, 0, 1)
-			grid[x].append(value)
-			next_grid[x].append(Cell.new())
+			grid[x].push_back(value)
+			next_grid[x].push_back(Cell.new())
 
 
 func _on_timer_timeout() -> void:
