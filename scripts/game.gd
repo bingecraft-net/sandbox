@@ -2,9 +2,9 @@ extends Node2D
 
 @export var grid_size: int = 64
 @export var noise: FastNoiseLite = FastNoiseLite.new()
-@export var dt: float = 0.125
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
+@onready var timer: Timer = $Timer
 
 var grid: Array[Array] = []
 var next_grid: Array[Array] = []
@@ -23,7 +23,10 @@ func _ready() -> void:
 			next_grid[x].append(Cell.new())
 
 
-func _process(delta: float) -> void:
+func _on_timer_timeout() -> void:
+	tick()
+
+func tick():
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var current_value: Cell = grid[x][y]
@@ -41,7 +44,7 @@ func _process(delta: float) -> void:
 					var neighbor_value = grid[neighbor_x][neighbor_y]
 					e_laplacian += (neighbor_value.energy_density - e) / 8.
 
-			e += e_laplacian * dt * delta
+			e += e_laplacian * timer.wait_time
 
 			if abs(e - 1.) < 0.01:
 				e -= 0.01

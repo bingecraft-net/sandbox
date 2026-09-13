@@ -276,3 +276,9 @@ noise = SubResource("FastNoiseLite_lnu2h")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1952044452]
 tile_set = SubResource("TileSet_lbhrr")
+
+[node name="Timer" type="Timer" parent="." unique_id=2091141924]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
