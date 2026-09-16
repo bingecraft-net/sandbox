@@ -17,8 +17,8 @@ func _ready() -> void:
 		next_grid.push_back([])
 		for y in range(grid_size):
 			var value = Cell.new()
-			var sample = noise.get_noise_2d(x, y)
-			value.energy_density = 4 * clamp(sample, 0, 1)
+			var sample = noise.get_noise_2d(x, y) + .4
+			value.energy_density = max(sample, 0)
 			grid[x].push_back(value)
 			next_grid[x].push_back(Cell.new())
 
@@ -49,8 +49,15 @@ func tick():
 			e += e_laplacian * timer.wait_time
 			
 			# smooth condensation (energy → matter)
-			var condensation_rate = smoothstep(0.0, 1.0, (e - 0.65) / 0.2)
+			var condensation_rate = smoothstep(0., 1., 0 if e < .1 else pow(e - .1, 2))
 			var condense_amount = condensation_rate * timer.wait_time
+			
+			# smooth melting (matter → energy)
+			var mass_melting_rate = 0 if m < 0.375 else pow(10 * (m - .375), 2)
+			var energy_melting_rate = smoothstep(0., 1., 0 if e < .33 else pow(3 * e - 1, 2))
+			var melting_rate = (mass_melting_rate + energy_melting_rate)
+			var melt_amount = melting_rate * timer.wait_time
+			
 			if e >= condense_amount:
 				e -= condense_amount
 				m += condense_amount
@@ -58,9 +65,6 @@ func tick():
 				m += e
 				e = 0
 			
-			# smooth melting (matter → energy)
-			var melting_rate = smoothstep(0.0, 1.0, (m - 0.75) / 0.2)
-			var melt_amount = melting_rate * timer.wait_time
 			if m >= melt_amount:
 				e += melt_amount
 				m -= melt_amount
@@ -94,6 +98,6 @@ class Cell:
 		var e = energy_density
 		var m = mass_density
 		return Vector2i(
-			0 if e <= 0 else 1 if e <= .65 else 2 if e <= .75 else 3 ,
-			0 if m <= 0 else 1 if m <= 0.75 else 2,
+			ceil(4 * smoothstep(0., 1., e)),
+			ceil(2 * smoothstep(0., 0.375 * 2, m)),
 		)
