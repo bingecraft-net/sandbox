@@ -44,7 +44,7 @@ func tick():
 					var neighbor_x = (x + dx + grid_size) % grid_size
 					var neighbor_y = (y + dy + grid_size) % grid_size
 					var neighbor_value = grid[neighbor_x][neighbor_y]
-					e_laplacian += (neighbor_value.energy_density - e) / 4.
+					e_laplacian += (neighbor_value.energy_density - e) / 8.
 			
 			e += e_laplacian * timer.wait_time
 			
