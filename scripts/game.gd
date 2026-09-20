@@ -3,27 +3,15 @@ extends Node2D
 @export var noise = FastNoiseLite.new()
 @export var grid_size = 64
 
-@onready var map: TileMapLayer = $TileMapLayer
+var cell_fab = load("res://scenes/cell.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-var elapsed = 0
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	elapsed += delta
-	for x in range(grid_size):
-		for y in range(grid_size):
-			var value = noise.get_noise_3d(x, y, elapsed)
-			var atlas_coords = classify(value)
-			map.set_cell(Vector2i(x, y), 0, atlas_coords)
-
-func classify(value: float) -> Vector2i:
-	var fx = atan(value * 24)
-	var gx = cos(fx)
-	var magnitude = 16 * gx
-	return floor(magnitude) * Vector2i.RIGHT
+	for x in range(-1, 1):
+		for y in range(-1, 1):
+			var cell = cell_fab.instantiate()
+			cell.noise = noise
+			cell.grid_size = grid_size
+			cell.offset = Vector2i(x, y) * grid_size
+			cell.position = Vector2i(x, y) * grid_size * 16
+			add_child(cell)
