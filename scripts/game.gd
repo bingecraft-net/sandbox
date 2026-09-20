@@ -3,6 +3,8 @@ extends Node2D
 @export var noise = FastNoiseLite.new()
 @export var grid_size = 64
 
+@onready var cells: Node2D = $Cells
+
 var cell_fab = load("res://scenes/cell.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -14,4 +16,4 @@ func _ready() -> void:
 			cell.grid_size = grid_size
 			cell.offset = Vector2i(x, y) * grid_size
 			cell.position = Vector2i(x, y) * grid_size * 16
-			add_child(cell)
+			cells.add_child(cell)

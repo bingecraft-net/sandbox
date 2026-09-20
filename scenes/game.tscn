@@ -9,6 +9,6 @@
 script = ExtResource("1_e2o6t")
 noise = SubResource("FastNoiseLite_0e48y")
 
-[node name="Node2D_Character" parent="." unique_id=1530174143 instance=ExtResource("2_lnu2h")]
+[node name="Cells" type="Node2D" parent="." unique_id=728613303]
 
-[node name="Cell" parent="." unique_id=336837038 instance=ExtResource("4_lbhrr")]
+[node name="Node2D_Character" parent="." unique_id=1530174143 instance=ExtResource("2_lnu2h")]

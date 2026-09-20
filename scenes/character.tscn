@@ -14,3 +14,14 @@ speed = 1024
 shape = SubResource("CircleShape2D_fc0e3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=510371124]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=648381332]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=847673131]
+offset_right = 418.0
+offset_bottom = 298.0
+bbcode_enabled = true
+text = "[color=#FFFFFF]Move: <ArrowKeys>
+Zoom in: <Z>
+Zoom out: <X>
+[/color]"
