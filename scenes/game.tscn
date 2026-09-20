@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://1b62wt0iucbm" path="res://scenes/character.tscn" id="2_lnu2h"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0e48y"]
-frequency = 0.08
+frequency = 0.005
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("2_feb5d")
