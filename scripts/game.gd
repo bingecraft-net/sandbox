@@ -22,7 +22,8 @@ func _process(delta: float) -> void:
 			var atlas_coords = classify(value)
 			map.set_cell(Vector2i(x, y), 0, atlas_coords)
 
-
 func classify(value: float) -> Vector2i:
-	var result = clamp(0, pow(abs(value), -0.9) - 1, 15) * Vector2i.RIGHT
-	return result
+	var fx = atan(value * 24)
+	var gx = cos(fx)
+	var magnitude = 16 * gx
+	return floor(magnitude) * Vector2i.RIGHT
