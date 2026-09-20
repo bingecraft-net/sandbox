@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bc2impsn4s5r3" path="res://scripts/game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://1b62wt0iucbm" path="res://scenes/character.tscn" id="2_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://7ilqwtgr43ip" path="res://scenes/cell.tscn" id="4_lbhrr"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0e48y"]
 
