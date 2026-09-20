@@ -24,5 +24,5 @@ func _process(delta: float) -> void:
 
 
 func classify(value: float) -> Vector2i:
-	var result = 16 * abs(value) * Vector2i.RIGHT
+	var result = clamp(0, pow(abs(value), -0.9) - 1, 15) * Vector2i.RIGHT
 	return result
