@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bqp6ijn2rfoyq"]
 
 [ext_resource type="Script" uid="uid://bc2impsn4s5r3" path="res://scenes/game.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://7ilqwtgr43ip" path="res://scenes/cell.tscn" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://1b62wt0iucbm" path="res://scenes/character.tscn" id="2_lnu2h"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0e48y"]
@@ -9,6 +10,8 @@
 script = ExtResource("1_e2o6t")
 noise = SubResource("FastNoiseLite_0e48y")
 
-[node name="Cells" type="Node2D" parent="." unique_id=728613303]
+[node name="Cell" parent="." unique_id=336837038 instance=ExtResource("2_lbhrr")]
 
 [node name="Node2D_Character" parent="." unique_id=1530174143 instance=ExtResource("2_lnu2h")]
+
+[connection signal="on_mode_change" from="Node2D_Character" to="Cell" method="_on_node_2d_character_on_mode_change"]

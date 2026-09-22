@@ -5,6 +5,7 @@ extends Node2D
 @onready var character_body: CharacterBody2D = $CharacterBody2D
 @onready var camera: Camera2D = $Camera2D
 
+signal on_mode_change
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -14,7 +15,10 @@ func _process(delta: float) -> void:
 	
 	var zoom = Input.get_axis("zoom out", "zoom in")
 	camera.zoom *= pow(2, delta * zoom)
-
+	
+	if Input.is_action_just_pressed("toggle mode"):
+		on_mode_change.emit()
+		
 
 func _physics_process(delta: float) -> void:
 	camera.position = character_body.position
