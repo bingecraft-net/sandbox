@@ -21,12 +21,8 @@ func _process(delta: float) -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var a = noise.get_noise_3d(x + offset.x, y + offset.y, elapsed)
-			var b = mass[x][y]
-			var atlas_coords = classify(a, b)
+			var fx = atan(a * 24)
+			var gx = cos(fx)
+			var magnitude = 16 * gx
+			var atlas_coords = floor(magnitude) * Vector2i.RIGHT
 			map.set_cell(Vector2i(x, y), 0, atlas_coords)
-
-func classify(a: float, b: float) -> Vector2i:
-	var fx = atan(a * 24)
-	var gx = cos(fx)
-	var magnitude = 16 * gx
-	return floor(magnitude) * Vector2i.RIGHT + floor(9 * b) * Vector2i.DOWN

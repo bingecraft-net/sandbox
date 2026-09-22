@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqp6ijn2rfoyq"]
 
-[ext_resource type="Script" uid="uid://bc2impsn4s5r3" path="res://scripts/game.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://bc2impsn4s5r3" path="res://scenes/game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://1b62wt0iucbm" path="res://scenes/character.tscn" id="2_lnu2h"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0e48y"]
