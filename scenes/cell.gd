@@ -19,18 +19,22 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	elapsed += delta
+
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var magnitude = 0.
 			if mode:
 				magnitude = 15 * mass[x][y]
 			else:
-				var a = noise.get_noise_3d(x + offset.x, y + offset.y, elapsed)
-				var fx = atan(a * 24)
-				var gx = cos(fx)
-				magnitude = 16 * gx
+				magnitude = 16 * sample(x + offset.x, y + offset.y, elapsed)
 			map.set_cell(Vector2i(x, y), 0, floor(magnitude) * Vector2i.RIGHT)
 
+
+func sample(x: float, y: float, elapsed: float) -> float:
+	var a = noise.get_noise_3d(x + offset.x, y + offset.y, elapsed)
+	var fx = atan(a * 24)
+	var gx = cos(fx)
+	return gx
 
 func _on_node_2d_character_on_mode_change() -> void:
 	mode = not mode
