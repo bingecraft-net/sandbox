@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://1b62wt0iucbm"]
 
-[ext_resource type="Script" uid="uid://h5j6jfls0e03" path="res://scripts/character.gd" id="1_glpr6"]
+[ext_resource type="Script" uid="uid://h5j6jfls0e03" path="res://scenes/character.gd" id="1_glpr6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fc0e3"]
 
@@ -24,4 +24,5 @@ bbcode_enabled = true
 text = "[color=#FFFFFF]Move: <ArrowKeys>
 Zoom in: <Z>
 Zoom out: <X>
+Toggle mode: <C>
 [/color]"
