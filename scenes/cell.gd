@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var noise: FastNoiseLite = FastNoiseLite.new()
-@export var grid_size: int = 64
+@export var grid_size: int = 128
 @export var offset: Vector2i = Vector2i.ZERO
 
 @onready var map: TileMapLayer = $TileMapLayer
