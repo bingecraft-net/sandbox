@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 			if mode:
 				magnitude = 15 * mass[x][y]
 			else:
-				magnitude = 16 * sample(x + offset.x, y + offset.y, elapsed)
+				magnitude = 16 * sample(x, y, elapsed)
 			map.set_cell(Vector2i(x, y), 0, floor(magnitude) * Vector2i.RIGHT)
 
 
