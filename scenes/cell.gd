@@ -15,7 +15,7 @@ func _ready() -> void:
 	for x in range(grid_size):
 		mass.push_back([])
 		for y in range(grid_size):
-			mass[x].push_back(.8)
+			mass[x].push_back(.25)
 
 func _process(delta: float) -> void:
 	elapsed += delta
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 func sample(x: float, y: float, elapsed: float) -> float:
 	var a = noise.get_noise_3d(x + offset.x, y + offset.y, elapsed)
 	var fx = atan(a * 24)
-	var gx = cos(fx)
+	var gx = 1 - cos(fx)
 	return gx
 
 func _on_node_2d_character_on_mode_change() -> void:
