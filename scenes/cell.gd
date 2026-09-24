@@ -8,7 +8,7 @@ extends Node2D
 
 var elapsed = 0
 var mass = Array()
-var mode = false
+var mode = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
