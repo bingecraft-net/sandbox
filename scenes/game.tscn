@@ -14,4 +14,9 @@ noise = SubResource("FastNoiseLite_0e48y")
 
 [node name="Node2D_Character" parent="." unique_id=1530174143 instance=ExtResource("2_lnu2h")]
 
+[node name="Timer" type="Timer" parent="." unique_id=359905589]
+wait_time = 0.05
+autostart = true
+
 [connection signal="on_mode_change" from="Node2D_Character" to="Cell" method="_on_node_2d_character_on_mode_change"]
+[connection signal="timeout" from="Timer" to="Cell" method="_on_timer_timeout"]
