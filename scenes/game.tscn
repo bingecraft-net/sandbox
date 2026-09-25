@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://1b62wt0iucbm" path="res://scenes/character.tscn" id="2_lnu2h"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0e48y"]
+frequency = 0.005
 
 [node name="Game" type="Node2D" unique_id=1279532778]
 script = ExtResource("1_e2o6t")

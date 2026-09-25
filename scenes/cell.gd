@@ -10,14 +10,14 @@ extends Node2D
 var elapsed = 0
 var mass = Array()
 var mode = true
-const MASS_GAIN := 0.35
+const MASS_GAIN := 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for x in range(grid_size):
 		mass.push_back([])
 		for y in range(grid_size):
-			mass[x].push_back(.25)
+			mass[x].push_back(.5 * randf())
 
 func _process(delta: float) -> void:
 	elapsed += delta
@@ -27,17 +27,15 @@ func _process(delta: float) -> void:
 		for y in range(grid_size):
 			var magnitude = 0.
 			if mode:
-				magnitude = 15.0 * mass[x][y]
+				magnitude = 15.0 * smoothstep(0., 1.0, mass[x][y])
 			else:
-				magnitude = 16.0 * sample(x, y, elapsed)
+				magnitude = 15.0 * smoothstep(0., 1.0, 1. - sample(x, y, elapsed))
 			map.set_cell(Vector2i(x, y), 0, floor(magnitude) * Vector2i.RIGHT)
 
 
 func sample(x: float, y: float, time: float) -> float:
 	var a = noise.get_noise_3d(x + offset.x, y + offset.y, time)
-	var fx = atan(a * 24)
-	var gx = 1 - cos(fx)
-	return gx
+	return pow(abs(sin(PI * a)), 0.5)
 
 func _on_node_2d_character_on_mode_change() -> void:
 	mode = not mode
