@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ca58c7kg13gvv" path="res://scenes/cell.gd" id="1_upbjj"]
 [ext_resource type="Texture2D" uid="uid://berwu3o6jau64" path="res://sprites/atlas.png" id="2_0s7o3"]
+[ext_resource type="Script" uid="uid://cjk1amm8avlav" path="res://scenes/canvas_layer.gd" id="3_nm02e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nm02e"]
 texture = ExtResource("2_0s7o3")
@@ -265,6 +266,10 @@ texture = ExtResource("2_0s7o3")
 [sub_resource type="TileSet" id="TileSet_ds1sf"]
 sources/0 = SubResource("TileSetAtlasSource_nm02e")
 
+[sub_resource type="Theme" id="Theme_k6tqi"]
+
+[sub_resource type="Theme" id="Theme_blackfont"]
+
 [node name="Cell" type="Node2D" unique_id=336837038]
 script = ExtResource("1_upbjj")
 
@@ -272,8 +277,81 @@ script = ExtResource("1_upbjj")
 tile_set = SubResource("TileSet_ds1sf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=211360163]
+offset = Vector2(0, 200)
+transform = Transform2D(1, 0, 0, 1, 0, 200)
+script = ExtResource("3_nm02e")
+theme = SubResource("Theme_k6tqi")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=661065969]
-offset_top = 120.0
-offset_right = 316.0
-offset_bottom = 538.0
+[node name="UIBackground" type="ColorRect" parent="CanvasLayer" unique_id=444444444]
+offset_right = 250.0
+offset_bottom = 280.0
+color = Color(0, 0, 0, 1)
+
+[node name="LayerLabel" type="Label" parent="CanvasLayer" unique_id=661065969]
+offset_right = 250.0
+offset_bottom = 25.0
+theme = SubResource("Theme_blackfont")
+text = "Layer: asda"
+
+[node name="ValleynessLabel" type="Label" parent="CanvasLayer" unique_id=111111111]
+offset_top = 25.0
+offset_right = 250.0
+offset_bottom = 50.0
+theme = SubResource("Theme_blackfont")
+text = "Valleyness"
+
+[node name="ValleynessSlider" type="HSlider" parent="CanvasLayer" unique_id=777777777]
+offset_top = 50.0
+offset_right = 250.0
+offset_bottom = 90.0
+theme = SubResource("Theme_blackfont")
+max_value = 10.0
+value = 5.0
+
+[node name="FrequencyLabel" type="Label" parent="CanvasLayer" unique_id=222222222]
+offset_top = 90.0
+offset_right = 250.0
+offset_bottom = 115.0
+theme = SubResource("Theme_blackfont")
+text = "Frequency"
+
+[node name="FrequencySlider" type="HSlider" parent="CanvasLayer" unique_id=888888888]
+offset_top = 115.0
+offset_right = 250.0
+offset_bottom = 155.0
+theme = SubResource("Theme_blackfont")
+max_value = 10.0
+value = 5.0
+
+[node name="LacunarityLabel" type="Label" parent="CanvasLayer" unique_id=333333333]
+offset_top = 155.0
+offset_right = 250.0
+offset_bottom = 180.0
+theme = SubResource("Theme_blackfont")
+text = "Lacunarity"
+
+[node name="LacunaritySlider" type="HSlider" parent="CanvasLayer" unique_id=999999999]
+offset_top = 180.0
+offset_right = 250.0
+offset_bottom = 220.0
+theme = SubResource("Theme_blackfont")
+max_value = 10.0
+value = 5.0
+
+[node name="MassGainLabel" type="Label" parent="CanvasLayer" unique_id=1740810775]
+offset_top = 220.0
+offset_right = 250.0
+offset_bottom = 269.0
+theme = SubResource("Theme_blackfont")
+text = "Mass gain
+"
+
+[node name="MassGainSlider" type="HSlider" parent="CanvasLayer" unique_id=2065183998]
+offset_top = 245.0
+offset_right = 250.0
+offset_bottom = 285.0
+theme = SubResource("Theme_blackfont")
+max_value = 10.0
+value = 5.0
+
+[connection signal="value_changed" from="CanvasLayer/MassGainSlider" to="." method="_on_mass_gain_slider_value_changed"]
