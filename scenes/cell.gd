@@ -37,6 +37,7 @@ func sample(x: float, y: float, time: float) -> float:
 	var a = noise.get_noise_3d(x + offset.x, y + offset.y, time)
 	return pow(abs(sin(PI * a)), 0.5)
 
+
 func _on_node_2d_character_on_mode_change() -> void:
 	mode = not mode
 
