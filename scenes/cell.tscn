@@ -270,3 +270,10 @@ script = ExtResource("1_upbjj")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=316970651]
 tile_set = SubResource("TileSet_ds1sf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=211360163]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=661065969]
+offset_top = 120.0
+offset_right = 316.0
+offset_bottom = 538.0

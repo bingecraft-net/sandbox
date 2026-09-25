@@ -5,6 +5,7 @@ extends Node2D
 @export var offset: Vector2i = Vector2i.ZERO
 
 @onready var map: TileMapLayer = $TileMapLayer
+@onready var label: RichTextLabel = $CanvasLayer/RichTextLabel
 
 var elapsed = 0
 var mass = Array()
@@ -20,6 +21,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	elapsed += delta
+	label.text = "mode: %s" % ("mass" if mode else "base")
 
 	for x in range(grid_size):
 		for y in range(grid_size):
