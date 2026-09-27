@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="disk-miner"
+config/name="factory-rpg"
 run/main_scene="uid://c7nnydi2u8kfn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
