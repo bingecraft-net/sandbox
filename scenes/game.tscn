@@ -1,6 +1,22 @@
 [gd_scene format=3 uid="uid://c7nnydi2u8kfn"]
 
 [ext_resource type="Script" uid="uid://51rxfvjwk2yh" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="MeshLibrary" uid="uid://c3c7o3fpev1pp" path="res://scenes/mesh_library.tres" id="2_yqjtg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yqjtg"]
 
 [node name="Node3D" type="Node3D" unique_id=1950023273]
 script = ExtResource("1_uwrxv")
+
+[node name="GridMap" type="GridMap" parent="." unique_id=1216066271]
+mesh_library = ExtResource("2_yqjtg")
+physics_material = SubResource("PhysicsMaterial_yqjtg")
+data = {
+"cells": PackedInt32Array(0, 0, 0, 65535, 65535, 0)
+}
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1305005161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0070548058, 1.2285247, 2.1326263)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1751863505]
+transform = Transform3D(1, 0, 0, 0, -0.23248641, 0.9725996, 0, -0.9725996, -0.23248641, 0, 2.7810218, -0.67634946)
