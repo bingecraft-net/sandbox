@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://lpiymd6bk6ms"]
+
+[ext_resource type="Texture2D" uid="uid://dwg6tcdh3f22p" path="res://scenes/mesh_library/1-straight.svg" id="1_06rdc"]
+[ext_resource type="Texture2D" uid="uid://cfqak8ayf68sd" path="res://scenes/mesh_library/2-turn-left.svg" id="2_lcowe"]
+[ext_resource type="Texture2D" uid="uid://cbresoh0r1hll" path="res://scenes/mesh_library/3-turn-right.svg" id="3_k5xwo"]
+[ext_resource type="Texture2D" uid="uid://bbws5mvn2uwal" path="res://scenes/mesh_library/4-saddle-left.svg" id="4_tye7d"]
+[ext_resource type="Texture2D" uid="uid://dcdoklvh78bsk" path="res://scenes/mesh_library/5-saddle-right.svg" id="5_4xjeu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jagym"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdeqk"]
+albedo_texture = ExtResource("1_06rdc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8hlr"]
+albedo_texture = ExtResource("2_lcowe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guy5x"]
+albedo_texture = ExtResource("3_k5xwo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2e065"]
+albedo_texture = ExtResource("4_tye7d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m54x"]
+albedo_texture = ExtResource("5_4xjeu")
+
+[node name="MeshLibrary" type="Node3D" unique_id=1220812441]
+
+[node name="0-Straight" type="MeshInstance3D" parent="." unique_id=940232082]
+mesh = SubResource("PlaneMesh_jagym")
+surface_material_override/0 = SubResource("StandardMaterial3D_kdeqk")
+
+[node name="1-Turn-Left" type="MeshInstance3D" parent="." unique_id=2142347397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.0538392)
+mesh = SubResource("PlaneMesh_jagym")
+surface_material_override/0 = SubResource("StandardMaterial3D_v8hlr")
+
+[node name="2-Turn-Right" type="MeshInstance3D" parent="." unique_id=1545866591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.178871)
+mesh = SubResource("PlaneMesh_jagym")
+surface_material_override/0 = SubResource("StandardMaterial3D_guy5x")
+
+[node name="4-Saddle-Left" type="MeshInstance3D" parent="." unique_id=746954567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0031867027, -0.0042648315, -6.444602)
+mesh = SubResource("PlaneMesh_jagym")
+surface_material_override/0 = SubResource("StandardMaterial3D_2e065")
+
+[node name="5-Saddle-Right" type="MeshInstance3D" parent="." unique_id=1122508583]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0015933514, -0.0021324158, -8.926242)
+mesh = SubResource("PlaneMesh_jagym")
+surface_material_override/0 = SubResource("StandardMaterial3D_6m54x")

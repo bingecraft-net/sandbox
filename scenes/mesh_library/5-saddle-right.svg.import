@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwg6tcdh3f22p"
-path.s3tc="res://.godot/imported/arrow.svg-bf878ce578eaeb6c44874ad3e7f184fe.s3tc.ctex"
+uid="uid://dcdoklvh78bsk"
+path.s3tc="res://.godot/imported/5-saddle-right.svg-37e5c9b5717c2581ced84b6945b09c64.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/arrow.svg"
-dest_files=["res://.godot/imported/arrow.svg-bf878ce578eaeb6c44874ad3e7f184fe.s3tc.ctex"]
+source_file="res://scenes/mesh_library/5-saddle-right.svg"
+dest_files=["res://.godot/imported/5-saddle-right.svg-37e5c9b5717c2581ced84b6945b09c64.s3tc.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7nnydi2u8kfn"]
 
 [ext_resource type="Script" uid="uid://51rxfvjwk2yh" path="res://scenes/game.gd" id="1_uwrxv"]
-[ext_resource type="MeshLibrary" uid="uid://c3c7o3fpev1pp" path="res://scenes/mesh_library.tres" id="2_yqjtg"]
+[ext_resource type="MeshLibrary" uid="uid://c3c7o3fpev1pp" path="res://scenes/mesh_library/mesh_library.tres" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://diof47ktygdyx" path="res://scenes/character.gd" id="3_lnu2h"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yqjtg"]
@@ -16,6 +16,7 @@ script = ExtResource("1_uwrxv")
 noise = SubResource("FastNoiseLite_yqjtg")
 
 [node name="GridMap" type="GridMap" parent="." unique_id=1216066271]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh_library = ExtResource("2_yqjtg")
 physics_material = SubResource("PhysicsMaterial_yqjtg")
 
@@ -26,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, -0.23248641, 0.9725996, 0, -0.9725996, -0.23
 script = ExtResource("3_lnu2h")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Character" unique_id=275063552]
-transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character/CharacterBody3D" unique_id=897752476]
 shape = SubResource("CapsuleShape3D_jagym")
