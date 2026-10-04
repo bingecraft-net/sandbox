@@ -117,9 +117,9 @@ func advance() -> bool:
 		push_error("Isoline does not intersect cell at position %s" % cursor)
 		return false
 
-	var iso_case = (8 if v0 else 0) + (4 if v1 else 0) + (2 if v2 else 0) + (1 if v3 else 0)
-	var saddle = iso_case == 5 or iso_case == 10
-	iso_case += 16 if v4 and saddle else 0
+	var saddle = v0 != v1 and v1 != v2 and v2 != v3
+
+	var iso_case = (16 if v4 and saddle else 0) + (8 if v0 else 0) + (4 if v1 else 0) + (2 if v2 else 0) + (1 if v3 else 0)
 
 	entry_direction = exit_direction
 	var table = exit_table[iso_case]
