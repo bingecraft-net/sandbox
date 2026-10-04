@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ejrudhmasqxs"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_jagym"]
+
+[node name="MeshLibrary" type="Node3D" unique_id=1220812441]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1145360860]
+mesh = SubResource("TorusMesh_jagym")
