@@ -4,6 +4,7 @@
 [ext_resource type="MeshLibrary" uid="uid://c3c7o3fpev1pp" path="res://scenes/mesh_library.tres" id="2_yqjtg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yqjtg"]
+frequency = 0.08
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yqjtg"]
 
