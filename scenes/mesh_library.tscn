@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://lpiymd6bk6ms"]
 
-[ext_resource type="Texture2D" uid="uid://dwg6tcdh3f22p" path="res://arrow.svg" id="1_06rdc"]
+[ext_resource type="Texture2D" uid="uid://dwg6tcdh3f22p" path="res://scenes/arrow.svg" id="1_06rdc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jagym"]
 
