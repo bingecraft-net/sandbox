@@ -10,7 +10,6 @@ var cursor = Vector3.ZERO
 var entry_direction = -1
 var exit_direction = -1
 var directions = [Vector3.RIGHT, Vector3.FORWARD, Vector3.LEFT, Vector3.BACK]
-var orientations = [0, 16, 10, 22]
 
 var exit_table = {
 	1:  [3, 2, -1, -1],
@@ -80,7 +79,8 @@ func advance() -> bool:
 	var item = item_table[entry_direction][exit_direction]
 	item += 2 if saddle else 0
 
-	var orientation = orientations[entry_direction]
+	var _basis = Basis.looking_at(directions[(entry_direction + 1) % 4])
+	var orientation = grid_map.get_orthogonal_index_from_basis(_basis)
 
 	grid_map.set_cell_item(cursor, item, orientation)
 
