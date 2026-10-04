@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#cccccc"/>
+  
+  <!-- Arrow pointing right -->
+  <polygon points="12,28 44,28 44,18 60,32 44,46 44,36 12,36" fill="#333333"/>
+</svg>

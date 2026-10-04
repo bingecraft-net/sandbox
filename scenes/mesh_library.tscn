@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://lpiymd6bk6ms"]
 
-[sub_resource type="TorusMesh" id="TorusMesh_jagym"]
+[ext_resource type="Texture2D" uid="uid://dwg6tcdh3f22p" path="res://arrow.svg" id="1_06rdc"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jagym"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1t1v"]
+albedo_texture = ExtResource("1_06rdc")
 
 [node name="MeshLibrary" type="Node3D" unique_id=1220812441]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1145360860]
-mesh = SubResource("TorusMesh_jagym")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=940232082]
+mesh = SubResource("PlaneMesh_jagym")
+surface_material_override/0 = SubResource("StandardMaterial3D_h1t1v")

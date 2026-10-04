@@ -18,9 +18,6 @@ noise = SubResource("FastNoiseLite_yqjtg")
 [node name="GridMap" type="GridMap" parent="." unique_id=1216066271]
 mesh_library = ExtResource("2_yqjtg")
 physics_material = SubResource("PhysicsMaterial_yqjtg")
-data = {
-"cells": PackedInt32Array(0, 0, 0, 65535, 65535, 0)
-}
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1751863505]
 transform = Transform3D(1, 0, 0, 0, -0.23248641, 0.9725996, 0, -0.9725996, -0.23248641, 0, 2.7810218, -0.67634946)
@@ -29,7 +26,7 @@ transform = Transform3D(1, 0, 0, 0, -0.23248641, 0.9725996, 0, -0.9725996, -0.23
 script = ExtResource("3_lnu2h")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Character" unique_id=275063552]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 0)
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character/CharacterBody3D" unique_id=897752476]
 shape = SubResource("CapsuleShape3D_jagym")
