@@ -19,7 +19,7 @@ func _ready() -> void:
 			push_error("Isoline does not intersect cell at position %s" % cursor)
 			return
 		
-		grid_map.set_cell_item(Vector3i(cursor.x, 0, cursor.y), 1, 1 + 4 * int(randf() * 2))
+		grid_map.set_cell_item(Vector3i(cursor.x, 0, cursor.y), 0, 0)
 
 		if direction == Vector2.RIGHT:
 			direction = Vector2.UP if v0 != v1 else Vector2.RIGHT if v1 != v2 else Vector2.DOWN

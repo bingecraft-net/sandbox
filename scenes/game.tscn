@@ -19,7 +19,7 @@ noise = SubResource("FastNoiseLite_yqjtg")
 mesh_library = ExtResource("2_yqjtg")
 physics_material = SubResource("PhysicsMaterial_yqjtg")
 data = {
-"cells": PackedInt32Array(0, 0, 1, 65535, 65535, 1)
+"cells": PackedInt32Array(0, 0, 0, 65535, 65535, 0)
 }
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1751863505]
