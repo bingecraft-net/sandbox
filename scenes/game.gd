@@ -7,40 +7,89 @@ extends Node3D
 
 var length = 0
 var cursor = Vector3.ZERO
-var entry_direction = -1
-var exit_direction = -1
-var directions = [Vector3.RIGHT, Vector3.FORWARD, Vector3.LEFT, Vector3.BACK]
+var entry_direction = Vector3.ZERO
+var exit_direction = Vector3.ZERO
 
 var exit_table = {
-	1:  [3, 2, -1, -1],
-	2:  [-1, 0, 3, -1],
-	3:  [0, -1, 2, -1],
-	4:  [-1, -1, 1, 0],
-	5:  [3, 2, 1, 0],
-	6:  [-1, 1, -1, 3],
-	7:  [1, -1, -1, 2],
-	8:  [1, -1, -1, 2],
-	9:  [-1, 1, -1, 3],
-	10: [1, 0, 3, 2],
-	11: [-1, -1, 1, 0],
-	12: [0, -1, 2, -1],
-	13: [-1, 0, 3, -1],
-	14: [3, 2, -1, -1],
-	21: [1, 0, 3, 2],
-	26: [3, 2, 1, 0]
+	1: {
+		Vector3.RIGHT: Vector3.BACK,
+		Vector3.FORWARD: Vector3.LEFT,
+	},
+	2: {
+		Vector3.FORWARD: Vector3.RIGHT,
+		Vector3.LEFT: Vector3.BACK,
+	},
+	3: {
+		Vector3.RIGHT: Vector3.RIGHT,
+		Vector3.LEFT: Vector3.LEFT,
+	},
+	4: {
+		Vector3.LEFT: Vector3.FORWARD,
+		Vector3.BACK: Vector3.RIGHT,
+	},
+	5: {
+		Vector3.RIGHT: Vector3.BACK,
+		Vector3.FORWARD: Vector3.LEFT,
+		Vector3.LEFT: Vector3.FORWARD,
+		Vector3.BACK: Vector3.RIGHT,
+	},
+	6: {
+		Vector3.FORWARD: Vector3.FORWARD,
+		Vector3.BACK: Vector3.BACK,
+	},
+	7: {
+		Vector3.RIGHT: Vector3.FORWARD,
+		Vector3.BACK: Vector3.LEFT,
+	},
+	8: {
+		Vector3.RIGHT: Vector3.FORWARD,
+		Vector3.BACK: Vector3.LEFT,
+	},
+	9: {
+		Vector3.FORWARD: Vector3.FORWARD,
+		Vector3.BACK: Vector3.BACK,
+	},
+	10: {
+		Vector3.RIGHT: Vector3.FORWARD,
+		Vector3.FORWARD: Vector3.RIGHT,
+		Vector3.LEFT: Vector3.BACK,
+		Vector3.BACK: Vector3.LEFT,
+	},
+	11: {
+		Vector3.LEFT: Vector3.FORWARD,
+		Vector3.BACK: Vector3.RIGHT,
+	},
+	12: {
+		Vector3.RIGHT: Vector3.RIGHT,
+		Vector3.LEFT: Vector3.LEFT,
+	},
+	13: {
+		Vector3.FORWARD: Vector3.RIGHT,
+		Vector3.LEFT: Vector3.BACK,
+	},
+	14: {
+		Vector3.RIGHT: Vector3.BACK,
+		Vector3.FORWARD: Vector3.LEFT,
+	},
+	21: {
+		Vector3.RIGHT: Vector3.FORWARD,
+		Vector3.FORWARD: Vector3.RIGHT,
+		Vector3.LEFT: Vector3.BACK,
+		Vector3.BACK: Vector3.LEFT,
+	},
+	26: {
+		Vector3.RIGHT: Vector3.BACK,
+		Vector3.FORWARD: Vector3.LEFT,
+		Vector3.LEFT: Vector3.FORWARD,
+		Vector3.BACK: Vector3.RIGHT,
+	},
 }
 
-var item_table = {
-	0: [0, 1, -1, 2],
-	1: [2, 0, 1, -1],
-	2: [-1, 2, 0, 1],
-	3: [1, -1, 2, 0],
-}
 
 func _ready() -> void:
 	advance()
-	character_body.position = cursor - directions[exit_direction] + Vector3.UP * 2
-	character_body.look_at(cursor + directions[exit_direction])
+	character_body.position = cursor - exit_direction + Vector3.UP * 2
+	character_body.look_at(cursor + exit_direction)
 	while advance():
 		pass
 
@@ -54,7 +103,7 @@ func advance() -> bool:
 		push_error("Isoline is too long, aborting")
 		return false
 
-	if length != 0 and exit_direction == -1:
+	if length != 0 and exit_direction == Vector3.ZERO:
 		push_error("Invalid exit_direction")
 		return false
 
@@ -73,13 +122,22 @@ func advance() -> bool:
 	iso_case += 16 if v4 and saddle else 0
 
 	entry_direction = exit_direction
-	exit_direction = exit_table[iso_case][exit_direction]
-	entry_direction = entry_direction if entry_direction >= 0 else exit_direction
+	var table = exit_table[iso_case]
+	if exit_direction == Vector3.ZERO:
+		exit_direction = table.keys()[0]
+	exit_direction = table[exit_direction]
+	entry_direction = entry_direction if entry_direction != Vector3.ZERO else exit_direction
 
-	var item = item_table[entry_direction][exit_direction]
-	item += 2 if saddle else 0
+	var item = 0
+	var cross = entry_direction.cross(exit_direction)
+	if cross.y < 0:
+		item = 2
+	elif cross.y > 0:
+		item = 1
+	if saddle:
+		item += 2
 
-	var _basis = Basis.looking_at(directions[(entry_direction + 1) % 4])
+	var _basis = Basis.looking_at(entry_direction)
 	var orientation = grid_map.get_orthogonal_index_from_basis(_basis)
 
 	grid_map.set_cell_item(cursor, item, orientation)
@@ -97,6 +155,6 @@ func advance() -> bool:
 			"orientation": orientation,
 		})
 
-	cursor += directions[exit_direction]
+	cursor += exit_direction
 
 	return true

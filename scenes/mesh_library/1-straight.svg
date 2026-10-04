@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Background -->
-  <rect width="64" height="64" fill="#cccccc"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+
   
-  <!-- Arrow pointing right -->
-  <polygon points="12,28 44,28 44,18 60,32 44,46 44,36 12,36" fill="#333333"/>
+  <rect width="64" height="64" fill="#cccccc"></rect>
+  
+  
+  
+<polygon points="12,28 44,28 44,18 60,32 44,46 44,36 12,36" fill="#333333" transform="translate(-2.15234375,-0.6498674665178577) scale(0.9371337890625,0.9143589564732143) rotate(-89.4923165403757,36,32)"></polygon>
 </svg>
