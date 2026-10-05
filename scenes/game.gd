@@ -88,8 +88,8 @@ var exit_table = {
 
 func _ready() -> void:
 	advance()
-	character_body.position = cursor - exit_direction + Vector3.UP * 2
-	character_body.look_at(cursor + exit_direction)
+	character_body.position = cursor - exit_direction + Vector3.UP * .625 + Vector3.RIGHT / 2
+	character_body.look_at(cursor + exit_direction + Vector3.RIGHT / 2)
 	while advance():
 		pass
 
